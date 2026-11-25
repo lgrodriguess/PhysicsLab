@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHYSICS LAB</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="js/navigation.js" defer></script>
+    <script src="js/physics/circuits.js" defer></script>
+    <script src="js/physics/magnetism.js" defer></script>
+    <script src="js/physics/induction.js" defer></script>
+    <script src="js/physics/electrostatics.js" defer></script>
+    <script src="js/physics/capacitors.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/features/theory.js" defer></script>
+    <script src="js/features/calculator.js" defer></script>
+    <script src="js/features/exercises.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">P</div>
+                <div class="brand-text">
+                    <h1>PHYSICS<span>LAB</span></h1>
+                    <p>LABORATÓRIO VIRTUAL</p>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <span class="section-label">MENU PRINCIPAL</span>
+                <nav class="navigation">
+                    <button class="nav-item active" data-page="home">
+                        <span class="nav-icon">⌂</span>
+                        <span>Início</span>
+                    </button>
+                    <button class="nav-item" data-page="electrostatics">
+                        <span class="nav-icon">±</span>
+                        <span>Eletrostática</span>
+                    </button>
+                    <button class="nav-item" data-page="capacitors">
+                        <span class="nav-icon">⫴</span>
+                        <span>Capacitores</span>
+                    </button>
+                    <button class="nav-item" data-page="circuits">
+                        <span class="nav-icon">ϟ</span>
+                        <span>Circuitos elétricos</span>
+                    </button>
+                    <button class="nav-item" data-page="magnetism">
+                        <span class="nav-icon">◎</span>
+                        <span>Magnetismo</span>
+                    </button>
+                    <button class="nav-item" data-page="induction">
+                        <span class="nav-icon">↝</span>
+                        <span>Indução eletromagnética</span>
+                    </button>
+                </nav>
+            </div>
+
+            <div class="sidebar-section">
+                <span class="section-label">FERRAMENTAS</span>
+                <nav class="navigation">
+                    <button class="nav-item" data-page="calculator">
+                        <span class="nav-icon">∑</span>
+                        <span>Calculadora</span>
+                    </button>
+                    <button class="nav-item" data-page="exercises">
+                        <span class="nav-icon">✎</span>
+                        <span>Exercícios</span>
+                    </button>
+                    <button class="nav-item" data-page="theory">
+                        <span class="nav-icon">◫</span>
+                        <span>Referencial teórico</span>
+                    </button>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="status-indicator"></div>
+                <span>Sistema operacional</span>
+                <span class="version">v1.2</span>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="breadcrumb">
+                    <span>PHYSICS LAB</span>
+                    <span class="breadcrumb-divider">/</span>
+                    <strong id="current-page">Início</strong>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="system-status">
+                        <span class="status-indicator"></span>
+                        Ambiente de aprendizagem
+                    </div>
+                    <div class="profile-icon">PL</div>
+                </div>
+
+            </header>
+
+            <div class="page-container">
+                <section class="page active" id="home">
+                    <div class="welcome-section">
+                        <div>
+                            <span class="eyebrow">LABORATÓRIO INTERATIVO DE FÍSICA III</span>
+
+                            <h2>Explore a Física.<br>
+                                <span>Entenda o universo.</span>
+                            </h2>
+
+                            <p>
+                                Explore fenômenos elétricos e magnéticos através
+                                de simulações, cálculos e experimentos interativos.
+                            </p>
+
+                            <button class="primary-button" data-go="circuits">
+                                Explorar laboratório
+                                <span>→</span>
+                            </button>
+                        </div>
+
+                        <div class="hero-visual">
+                            <div class="orbit orbit-one"></div>
+                            <div class="orbit orbit-two"></div>
+                            <div class="orbit orbit-three"></div>
+                            <div class="hero-core">Φ</div>
+                            <div class="orbit-dot dot-one"></div>
+                            <div class="orbit-dot dot-two"></div>
+                            <div class="orbit-dot dot-three"></div>
+                        </div>
+                    </div>
+
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">ÁREA DE APRENDIZAGEM</span>
+                            <h3>Laboratório virtual</h3>
+                            <p>Selecione um módulo para começar sua exploração.</p>
+                        </div>
+                    </div>
+
+                    <div class="module-grid">
+
+                        <article class="module-card" data-go="electrostatics">
+                            <div class="module-icon green">±</div>
+                            <span class="module-tag">ELETROSTÁTICA</span>
+                            <h4>Cargas e campo elétrico</h4>
+                            <p>Posicione cargas e veja o campo, o potencial e a força em qualquer ponto.</p>
+                            <div class="module-link">Acessar módulo <span>→</span></div>
+                        </article>
+
+                        <article class="module-card" data-go="capacitors">
+                            <div class="module-icon teal">⫴</div>
+                            <span class="module-tag">ELETROSTÁTICA</span>
+                            <h4>Capacitores</h4>
+                            <p>Altere placas, tensão e dielétrico e compare associações em série e paralelo.</p>
+                            <div class="module-link">Acessar módulo <span>→</span></div>
+                        </article>
+
+                        <article class="module-card" data-go="circuits">
+                            <div class="module-icon blue">ϟ</div>
+                            <span class="module-tag">ELETRICIDADE</span>
+                            <h4>Circuitos elétricos</h4>
+                            <p>Explore circuitos, resistores, corrente elétrica e tensão.</p>
+                            <div class="module-link">Acessar módulo <span>→</span></div>
+                        </article>
+
+                        <article class="module-card" data-go="magnetism">
+                            <div class="module-icon purple">◎</div>
+                            <span class="module-tag">ELETROMAGNETISMO</span>
+                            <h4>Magnetismo</h4>
+                            <p>Investigue forças magnéticas e movimento de partículas.</p>
+                            <div class="module-link">Acessar módulo <span>→</span></div>
+                        </article>
+
+                        <article class="module-card" data-go="induction">
+                            <div class="module-icon orange">↝</div>
+                            <span class="module-tag">INDUÇÃO</span>
+                            <h4>Indução eletromagnética</h4>
+                            <p>Descubra como a variação do fluxo magnético gera tensão.</p>
+                            <div class="module-link">Acessar módulo <span>→</span></div>
+                        </article>
+
+                        <article class="module-card" data-go="exercises">
+                            <div class="module-icon green">✎</div>
+                            <span class="module-tag">PRÁTICA</span>
+                            <h4>Exercícios</h4>
+                            <p>Resolva questões geradas automaticamente e acompanhe seu desempenho.</p>
+                            <div class="module-link">Praticar agora <span>→</span></div>
+                        </article>
+                    </div>
+
+                    <div class="bottom-grid">
+                    <div class="info-card theory-card">
+                        <span class="eyebrow">BASE CIENTÍFICA</span>
+                        <h3>Aprenda a teoria</h3>
+                        <p>
+                            Consulte conceitos, equações físicas e grandezas
+                            utilizadas nas simulações.
+                        </p>
+                        <button class="secondary-button" data-go="theory">
+                            Consultar conteúdo →
+                        </button>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="eyebrow">FERRAMENTA</span>
+                        <h3>Calculadora de fórmulas</h3>
+                        <p>
+                            Escolha uma fórmula e calcule qualquer variável
+                            a partir das outras, com o passo a passo.
+                        </p>
+                        <button class="secondary-button" data-go="calculator">
+                            Abrir calculadora →
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+<section class="page" id="circuits">
+
+    <div class="page-heading">
+        <span class="eyebrow">MÓDULO 01 · ELETRICIDADE</span>
+        <h2>Simulador de circuitos</h2>
+        <p>Monte circuitos elétricos, altere os parâmetros e observe os resultados.</p>
+    </div>
+
+    <div class="simulator-panel">
+
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">CONFIGURAÇÃO</span>
+                <h3>Tipo de circuito</h3>
+            </div>
+            <span class="live-label">
+                <span class="status-indicator"></span>
+                Simulação ativa
+            </span>
+        </div>
+
+        <div class="circuit-types">
+
+            <button class="circuit-type active" data-circuit="series">
+                <span class="type-icon">↔</span>
+                <strong>Série</strong>
+                <small>Um único caminho</small>
+            </button>
+
+            <button class="circuit-type" data-circuit="parallel">
+                <span class="type-icon">⑂</span>
+                <strong>Paralelo</strong>
+                <small>Múltiplos caminhos</small>
+            </button>
+
+            <button class="circuit-type" data-circuit="mixed">
+                <span class="type-icon">⌘</span>
+                <strong>Misto</strong>
+                <small>Série e paralelo</small>
+            </button>
+        </div>
+    </div>
+
+    <div class="simulator-layout">
+        <div class="simulator-panel circuit-visual-panel">
+
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">REPRESENTAÇÃO VISUAL</span>
+                    <h3>Diagrama elétrico</h3>
+                </div>
+
+                <span class="diagram-badge">DC</span>
+            </div>
+
+            <div class="circuit-canvas" id="circuit-diagram"></div>
+
+            <div class="diagram-legend">
+                <span><i class="legend-line"></i> Condutor</span>
+                <span><i class="legend-battery"></i> Fonte de tensão</span>
+                <span><i class="legend-resistor"></i> Resistor</span>
+            </div>
+        </div>
+
+        <div class="simulator-panel controls-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">PARÂMETROS</span>
+                    <h3>Configurar simulação</h3>
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                <label for="circuit-voltage">
+                    Tensão da bateria
+                    <strong><span id="voltage-value">12</span> V</strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="circuit-voltage"
+                    min="1"
+                    max="48"
+                    step="1"
+                    value="12"
+                >
+
+                <div class="range-limits">
+                    <span>1 V</span>
+                    <span>48 V</span>
+                </div>
+
+            </div>
+
+            <div class="control-divider"></div>
+            <div class="control-group">
+
+                <label for="resistance-1">
+                    Resistência R1
+                    <strong><span id="resistance-1-value">10</span> Ω</strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="resistance-1"
+                    min="1"
+                    max="100"
+                    step="1"
+                    value="10"
+                >
+
+                <div class="range-limits">
+                    <span>1 Ω</span>
+                    <span>100 Ω</span>
+                </div>
+
+            </div>
+
+            <div class="control-group">
+
+                <label for="resistance-2">
+                    Resistência R2
+                    <strong><span id="resistance-2-value">20</span> Ω</strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="resistance-2"
+                    min="1"
+                    max="100"
+                    step="1"
+                    value="20">
+
+                <div class="range-limits">
+                    <span>1 Ω</span>
+                    <span>100 Ω</span>
+                </div>
+
+            </div>
+
+            <div class="control-group" id="resistance-3-group">
+
+                <label for="resistance-3">
+                    Resistência R3
+                    <strong><span id="resistance-3-value">30</span> Ω</strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="resistance-3"
+                    min="1"
+                    max="100"
+                    step="1"
+                    value="30"
+                >
+
+                <div class="range-limits">
+                    <span>1 Ω</span>
+                    <span>100 Ω</span>
+                </div>
+
+            </div>
+
+            <button class="reset-button" id="reset-circuit">
+                ↻ Restaurar valores iniciais
+            </button>
+
+        </div>
+
+    </div>
+
+<div class="results-section">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">ANÁLISE ELÉTRICA</span>
+            <h3>Resultados da simulação</h3>
+            <p>Os valores são atualizados automaticamente.</p>
+        </div>
+    </div>
+
+    <div class="results-grid">
+        <div class="result-card">
+            <span class="result-label">RESISTÊNCIA EQUIVALENTE</span>
+            <strong id="result-resistance">30,00 Ω</strong>
+            <span class="result-description">Resistência total do circuito</span>
+        </div>
+
+        <div class="result-card highlight-result">
+            <span class="result-label">CORRENTE TOTAL</span>
+            <strong id="result-current">0,40 A</strong>
+            <span class="result-description">Corrente fornecida pela fonte</span>
+        </div>
+
+        <div class="result-card">
+            <span class="result-label">TENSÃO DA FONTE</span>
+            <strong id="result-voltage">12,00 V</strong>
+            <span class="result-description">Tensão elétrica aplicada</span>
+        </div>
+
+        <div class="result-card">
+            <span class="result-label">POTÊNCIA TOTAL</span>
+            <strong id="result-power">4,80 W</strong>
+            <span class="result-description">Potência dissipada</span>
+        </div>
+    </div>
+</div>
+
+<div class="simulator-panel details-panel">
+    <div class="panel-heading">
+        <div>
+            <span class="eyebrow">DADOS DOS COMPONENTES</span>
+            <h3>Análise dos resistores</h3>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="circuit-table">
+            <thead>
+                <tr>
+                    <th>Componente</th>
+                    <th>Resistência</th>
+                    <th>Tensão</th>
+                    <th>Corrente</th>
+                    <th>Potência</th>
+                </tr>
+            </thead>
+            <tbody id="resistor-results"></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="simulator-panel explanation-panel">
+    <span class="eyebrow">FUNDAMENTAÇÃO FÍSICA</span>
+    <h3>Como os cálculos são realizados?</h3>
+
+    <div class="formula-grid">
+        <div class="formula-item">
+            <strong>Lei de Ohm</strong>
+            <div class="formula">U = R · I</div>
+            <p>Relaciona tensão, resistência e corrente elétrica.</p>
+        </div>
+
+        <div class="formula-item">
+            <strong>Potência elétrica</strong>
+            <div class="formula">P = U · I</div>
+            <p>Determina a potência elétrica dissipada.</p>
+        </div>
+
+        <div class="formula-item">
+            <strong>Associação em série</strong>
+            <div class="formula">Req = R1 + R2 + R3</div>
+            <p>A resistência equivalente é a soma das resistências.</p>
+        </div>
+
+        <div class="formula-item">
+            <strong>Associação em paralelo</strong>
+            <div class="formula">1/Req = 1/R1 + 1/R2 + 1/R3</div>
+            <p>O inverso da resistência equivalente é a soma dos inversos.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+        <section id="magnetism" class="page">
+    <div class="page-heading">
+        <span class="eyebrow">MÓDULO 02 · ELETROMAGNETISMO</span>
+        <h1>Magnetismo</h1>
+        <p>Explore a interação entre partículas carregadas e campos magnéticos.</p>
+    </div>
+
+    <div class="magnetism-layout">
+        <div class="magnetism-controls">
+            <div class="magnetism-card">
+                <h2>Parâmetros da partícula</h2>
+                <p class="magnetism-description">Altere os valores para observar os efeitos do campo magnético.</p>
+
+                <div class="magnetism-input">
+                    <label for="mag-charge">Carga elétrica (μC)</label>
+                    <input type="number" id="mag-charge" value="5" min="-10" max="10" step="0.5">
+                </div>
+
+                <div class="magnetism-input">
+                    <label for="mag-velocity">Velocidade (m/s)</label>
+                    <input type="number" id="mag-velocity" value="20" min="0" max="100" step="1">
+                </div>
+
+                <div class="magnetism-input">
+                    <label for="mag-mass">Massa (mg)</label>
+                    <input type="number" id="mag-mass" value="1" min="0.1" max="10" step="0.1">
+                </div>
+
+                <div class="magnetism-input">
+                    <label for="mag-field">Campo magnético (T)</label>
+                    <input type="number" id="mag-field" value="0.5" min="0" max="2" step="0.1">
+                </div>
+
+                <div class="magnetism-input">
+                    <label for="mag-angle">Ângulo entre velocidade e campo (°)</label>
+                    <input type="number" id="mag-angle" value="90" min="0" max="180" step="1">
+                </div>
+
+                <button id="mag-reset" class="magnetism-reset">Restaurar valores</button>
+            </div>
+        </div>
+
+        <div class="magnetism-results">
+            <div class="magnetism-card">
+                <h2>Visualização do campo magnético</h2>
+                <p class="magnetism-description">Representação simplificada do movimento da partícula.</p>
+
+                <div class="magnetism-visual">
+                    <svg id="magnetic-svg" viewBox="0 0 600 300" role="img" aria-label="Representação da partícula em um campo magnético">
+                        <rect x="10" y="10" width="580" height="280" rx="12" fill="#f4f7fc"/>
+                        <g id="magnetic-field-points"></g>
+                        <path id="magnetic-trajectory" d="" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+                        <circle id="magnetic-particle" cx="300" cy="150" r="8" fill="#ef4444"/>
+                        <text x="25" y="35" fill="#475569" font-size="13">Campo magnético: ⊗ entrando na tela</text>
+                        <text id="magnetic-angle-label" x="300" y="270" text-anchor="middle" fill="#475569" font-size="13"></text>
+                    </svg>
+                </div>
+
+                <div class="magnetism-legend">
+                    <span><i class="legend-particle"></i> Partícula</span>
+                    <span><i class="legend-trajectory"></i> Trajetória</span>
+                    <span>⊗ Campo entrando na tela</span>
+                </div>
+            </div>
+
+            <div class="magnetism-card">
+                <h2>Resultados dos cálculos</h2>
+
+                <div class="magnetism-result-grid">
+                    <div class="magnetism-result">
+                        <span>Força magnética</span>
+                        <strong id="mag-force">0 N</strong>
+                    </div>
+
+                    <div class="magnetism-result">
+                        <span>Raio da trajetória</span>
+                        <strong id="mag-radius">0 m</strong>
+                    </div>
+
+                    <div class="magnetism-result">
+                        <span>Componente perpendicular</span>
+                        <strong id="mag-perpendicular">0 m/s</strong>
+                    </div>
+
+                    <div class="magnetism-result">
+                        <span>Movimento</span>
+                        <strong id="mag-motion">Repouso</strong>
+                    </div>
+                </div>
+
+                <div class="magnetism-explanation">
+                    <h3>Entenda o resultado</h3>
+                    <p id="mag-explanation"></p>
+                </div>
+            </div>
+
+            <div class="magnetism-card">
+                <h2>Fórmulas utilizadas</h2>
+
+                <div class="magnetism-formula">
+                    <strong>Força magnética</strong>
+                    <span>F = |q| · v · B · sen(θ)</span>
+                </div>
+
+                <div class="magnetism-formula">
+                    <strong>Raio da trajetória</strong>
+                    <span>r = m · v · sen(θ) / (|q| · B)</span>
+                </div>
+
+                <div class="magnetism-formula">
+                    <strong>Componente perpendicular</strong>
+                    <span>v⊥ = v · sen(θ)</span>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="page" id="induction">
+    <div class="page-heading">
+        <span class="eyebrow">MÓDULO 03 · ELETROMAGNETISMO</span>
+        <h2>Indução eletromagnética</h2>
+        <p>Explore como a variação do fluxo magnético pode gerar uma força eletromotriz induzida.</p>
+    </div>
+
+    <div class="induction-layout">
+        <div class="induction-controls">
+            <div class="induction-card">
+                <h3>Parâmetros da simulação</h3>
+                <p class="induction-description">Altere os valores para observar a indução eletromagnética.</p>
+
+                <div class="induction-input">
+                    <label for="induction-field-initial">Campo magnético inicial (T)</label>
+                    <input type="number" id="induction-field-initial" value="0.5" min="0" max="5" step="0.1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="induction-field-final">Campo magnético final (T)</label>
+                    <input type="number" id="induction-field-final" value="1" min="0" max="5" step="0.1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="induction-area">Área da espira (cm²)</label>
+                    <input type="number" id="induction-area" value="100" min="1" max="10000" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="induction-turns">Número de espiras</label>
+                    <input type="number" id="induction-turns" value="10" min="1" max="1000" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="induction-time">Intervalo de tempo (s)</label>
+                    <input type="number" id="induction-time" value="2" min="0.01" max="1000" step="0.1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="induction-angle-initial">Ângulo inicial entre B e a normal da espira (°)</label>
+                    <input type="number" id="induction-angle-initial" value="0" min="0" max="180" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="induction-angle-final">Ângulo final entre B e a normal da espira (°)</label>
+                    <input type="number" id="induction-angle-final" value="60" min="0" max="180" step="1">
+                </div>
+
+                <button id="induction-reset" class="induction-reset">Restaurar valores</button>
+            </div>
+        </div>
+
+        <div class="induction-results">
+            <div class="induction-card">
+                <h3>Visualização da indução</h3>
+                <p class="induction-description">Representação da espira submetida ao campo magnético.</p>
+
+                <div class="induction-visual">
+                    <svg viewBox="0 0 600 300" id="induction-svg" role="img" aria-label="Espira em um campo magnético">
+                        <rect x="10" y="10" width="580" height="280" rx="12" fill="#f4f7fc"/>
+                        <g id="induction-field-lines" stroke="#94a3b8" stroke-width="2" fill="none">
+                            <path d="M 70 80 L 530 80"/>
+                            <path d="M 70 120 L 530 120"/>
+                            <path d="M 70 160 L 530 160"/>
+                            <path d="M 70 200 L 530 200"/>
+                        </g>
+                        <g id="induction-field-arrows" fill="#64748b">
+                            <path d="M 520 74 L 532 80 L 520 86"/>
+                            <path d="M 520 114 L 532 120 L 520 126"/>
+                            <path d="M 520 154 L 532 160 L 520 166"/>
+                            <path d="M 520 194 L 532 200 L 520 206"/>
+                        </g>
+                        <ellipse id="induction-coil" cx="300" cy="150" rx="90" ry="45" fill="none" stroke="#2563eb" stroke-width="5"/>
+                        <ellipse cx="300" cy="150" rx="78" ry="39" fill="none" stroke="#60a5fa" stroke-width="2"/>
+                        <text x="30" y="35" fill="#475569" font-size="13">Campo magnético</text>
+                        <text id="induction-visual-value" x="300" y="260" text-anchor="middle" fill="#475569" font-size="13"></text>
+                    </svg>
+                </div>
+
+                <div class="induction-legend">
+                    <span><i class="induction-legend-field"></i> Campo magnético</span>
+                    <span><i class="induction-legend-coil"></i> Espira</span>
+                </div>
+            </div>
+
+            <div class="induction-card">
+                <h3>Resultados dos cálculos</h3>
+
+                <div class="induction-result-grid">
+                    <div class="induction-result">
+                        <span>Fluxo inicial</span>
+                        <strong id="induction-flux-initial">0 Wb</strong>
+                    </div>
+
+                    <div class="induction-result">
+                        <span>Fluxo final</span>
+                        <strong id="induction-flux-final">0 Wb</strong>
+                    </div>
+
+                    <div class="induction-result">
+                        <span>Variação do fluxo</span>
+                        <strong id="induction-flux-change">0 Wb</strong>
+                    </div>
+
+                    <div class="induction-result">
+                        <span>Força eletromotriz induzida</span>
+                        <strong id="induction-emf">0 V</strong>
+                    </div>
+                </div>
+
+                <div class="induction-explanation">
+                    <h4>Entenda o resultado</h4>
+                    <p id="induction-explanation"></p>
+                </div>
+            </div>
+
+            <div class="induction-card">
+                <h3>Fórmulas utilizadas</h3>
+
+                <div class="induction-formula">
+                    <strong>Fluxo magnético</strong>
+                    <span>Φ = B · A · cos(θ)</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Variação do fluxo</strong>
+                    <span>ΔΦ = Φfinal − Φinicial</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Lei de Faraday-Lenz</strong>
+                    <span>ε = −N · ΔΦ / Δt</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page" id="electrostatics">
+    <div class="page-heading">
+        <span class="eyebrow">MÓDULO 04 · ELETROSTÁTICA</span>
+        <h2>Cargas, campo e potencial elétrico</h2>
+        <p>Coloque duas cargas puntiformes, escolha um ponto P e veja o campo elétrico, o potencial e a força. Você também pode arrastar o ponto P direto na figura.</p>
+    </div>
+
+    <div class="induction-layout">
+        <div class="induction-controls">
+            <div class="induction-card">
+                <h3>Parâmetros da simulação</h3>
+                <p class="induction-description">Use valores negativos para cargas negativas. As cargas ficam sobre o eixo x, a primeira na origem.</p>
+
+                <div class="induction-input">
+                    <label for="es-q1">Carga q1 (nC)</label>
+                    <input type="number" id="es-q1" value="5" min="-50" max="50" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="es-q2">Carga q2 (nC)</label>
+                    <input type="number" id="es-q2" value="-5" min="-50" max="50" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="es-d">Distância entre q1 e q2 (cm)</label>
+                    <input type="number" id="es-d" value="40" min="10" max="80" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="es-px">Posição x do ponto P (cm)</label>
+                    <input type="number" id="es-px" value="20" min="-20" max="100" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="es-py">Posição y do ponto P (cm)</label>
+                    <input type="number" id="es-py" value="15" min="-33" max="33" step="1">
+                </div>
+
+                <button id="es-reset" class="induction-reset">Restaurar valores</button>
+            </div>
+        </div>
+
+        <div class="induction-results">
+            <div class="induction-card">
+                <h3>Campo e superfície equipotencial</h3>
+                <p class="induction-description">Linhas de campo saem das cargas positivas e chegam às negativas. A curva tracejada passa por P e tem o mesmo potencial em todos os pontos.</p>
+
+                <div class="induction-visual">
+                    <svg viewBox="0 0 600 320" id="es-svg" role="img" aria-label="Linhas de campo elétrico de duas cargas puntiformes" style="touch-action:none">
+                        <rect x="4" y="4" width="592" height="312" rx="12" fill="#f4f7fc"/>
+                        <path id="es-equipotential" fill="none" stroke="#e58a32" stroke-width="2" stroke-dasharray="6 5"/>
+                        <g id="es-lines" fill="none" stroke="#94a3b8" stroke-width="1.6"></g>
+                        <g id="es-line-arrows" fill="#64748b"></g>
+                        <g id="es-charges"></g>
+                        <line id="es-vector" stroke="#16a36a" stroke-width="3" stroke-linecap="round"/>
+                        <polygon id="es-vector-head" fill="#16a36a"/>
+                        <circle id="es-probe" r="8" fill="#ffffff" stroke="#16a36a" stroke-width="3" style="cursor:grab"/>
+                        <text id="es-probe-label" font-size="13" font-weight="700" fill="#166534">P</text>
+                    </svg>
+                </div>
+
+                <div class="induction-legend">
+                    <span><i class="induction-legend-field"></i> Linhas de campo</span>
+                    <span><i class="es-legend-vector"></i> Campo resultante em P</span>
+                    <span><i class="es-legend-equi"></i> Equipotencial de P</span>
+                </div>
+            </div>
+
+            <div class="induction-card">
+                <h3>Resultados em P</h3>
+
+                <div class="induction-result-grid">
+                    <div class="induction-result">
+                        <span>Campo elétrico (módulo)</span>
+                        <strong id="es-e-mag">0 N/C</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Direção do campo (em relação ao eixo x)</span>
+                        <strong id="es-e-angle">0°</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Componentes Ex e Ey</span>
+                        <strong id="es-e-comp">0 ; 0 N/C</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Potencial elétrico</span>
+                        <strong id="es-potential">0 V</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Força sobre uma carga de prova de +1 nC</span>
+                        <strong id="es-force">0 N</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Distâncias de P a q1 e q2</span>
+                        <strong id="es-dist">0 ; 0 cm</strong>
+                    </div>
+                </div>
+
+                <div class="induction-explanation">
+                    <h4>Entenda o resultado</h4>
+                    <p id="es-explanation"></p>
+                </div>
+            </div>
+
+            <div class="induction-card">
+                <h3>Fórmulas utilizadas</h3>
+
+                <div class="induction-formula">
+                    <strong>Campo de cada carga</strong>
+                    <span>E = k · |q| / r²</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Superposição (soma vetorial)</strong>
+                    <span>E = E1 + E2 (em componentes x e y)</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Potencial (soma algébrica)</strong>
+                    <span>V = k · q1 / r1 + k · q2 / r2</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Força sobre a carga de prova</strong>
+                    <span>F = q0 · E</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page" id="capacitors">
+    <div class="page-heading">
+        <span class="eyebrow">MÓDULO 05 · ELETROSTÁTICA</span>
+        <h2>Capacitores e dielétricos</h2>
+        <p>Veja como área, distância, tensão e dielétrico mudam a capacitância, a carga e a energia armazenada. Depois, compare as associações em série e em paralelo.</p>
+    </div>
+
+    <div class="induction-layout">
+        <div class="induction-controls">
+            <div class="induction-card">
+                <h3>Capacitor de placas paralelas</h3>
+                <p class="induction-description">Escolha se a bateria fica ligada ao inserir o dielétrico.</p>
+
+                <div class="induction-input">
+                    <label for="cap-area">Área de cada placa (cm²)</label>
+                    <input type="number" id="cap-area" value="100" min="1" max="10000" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="cap-dist">Distância entre as placas (mm)</label>
+                    <input type="number" id="cap-dist" value="2" min="0.1" max="20" step="0.1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="cap-material">Dielétrico</label>
+                    <select id="cap-material">
+                        <option value="1">Vácuo ou ar (κ = 1)</option>
+                        <option value="2.3">Polietileno (κ ≈ 2,3)</option>
+                        <option value="3.7">Papel (κ ≈ 3,7)</option>
+                        <option value="5">Vidro (κ ≈ 5)</option>
+                        <option value="80">Água (κ ≈ 80)</option>
+                        <option value="custom">Outro valor…</option>
+                    </select>
+                </div>
+
+                <div class="induction-input">
+                    <label for="cap-kappa">Constante dielétrica κ</label>
+                    <input type="number" id="cap-kappa" value="1" min="1" max="100" step="0.1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="cap-voltage">Tensão da bateria (V)</label>
+                    <input type="number" id="cap-voltage" value="12" min="1" max="1000" step="1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="cap-mode">Bateria</label>
+                    <select id="cap-mode">
+                        <option value="connected">Ligada (tensão constante)</option>
+                        <option value="disconnected">Desligada (carga constante)</option>
+                    </select>
+                </div>
+
+                <button id="cap-reset" class="induction-reset">Restaurar valores</button>
+            </div>
+
+            <div class="induction-card">
+                <h3>Associação de dois capacitores</h3>
+                <p class="induction-description">Valores iniciais do exemplo de aula: 6 µF, 3 µF e 18 V.</p>
+
+                <div class="induction-input">
+                    <label for="cap-c1">C1 (µF)</label>
+                    <input type="number" id="cap-c1" value="6" min="0.1" max="1000" step="0.1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="cap-c2">C2 (µF)</label>
+                    <input type="number" id="cap-c2" value="3" min="0.1" max="1000" step="0.1">
+                </div>
+
+                <div class="induction-input">
+                    <label for="cap-assoc-v">Tensão aplicada (V)</label>
+                    <input type="number" id="cap-assoc-v" value="18" min="1" max="1000" step="1">
+                </div>
+            </div>
+        </div>
+
+        <div class="induction-results">
+            <div class="induction-card">
+                <h3>Visualização</h3>
+                <p class="induction-description">Mais sinais nas placas significa mais carga. As setas mostram o campo entre as placas.</p>
+
+                <div class="induction-visual">
+                    <svg viewBox="0 0 600 300" id="cap-svg" role="img" aria-label="Capacitor de placas paralelas">
+                        <rect x="4" y="4" width="592" height="292" rx="12" fill="#f4f7fc"/>
+                        <g id="cap-wires" stroke="#475569" stroke-width="2.5" fill="none"></g>
+                        <rect id="cap-plate-top" x="170" width="260" height="10" rx="3" fill="#2563eb"/>
+                        <rect id="cap-plate-bottom" x="170" width="260" height="10" rx="3" fill="#2563eb"/>
+                        <rect id="cap-dielectric" x="174" width="252" fill="#e58a32" opacity="0"/>
+                        <g id="cap-field" stroke="#16a36a" stroke-width="2" fill="#16a36a"></g>
+                        <g id="cap-signs" font-size="16" font-weight="800" text-anchor="middle"></g>
+                        <text id="cap-visual-value" x="300" y="285" text-anchor="middle" fill="#475569" font-size="13"></text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="induction-card">
+                <h3>Resultados do capacitor</h3>
+
+                <div class="induction-result-grid">
+                    <div class="induction-result">
+                        <span>Capacitância sem dielétrico (C0)</span>
+                        <strong id="cap-c0">0 F</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Capacitância com dielétrico (C)</span>
+                        <strong id="cap-c">0 F</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Carga em cada placa</span>
+                        <strong id="cap-q">0 C</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Tensão entre as placas</span>
+                        <strong id="cap-v">0 V</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Campo elétrico entre as placas</span>
+                        <strong id="cap-e">0 V/m</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Energia armazenada</span>
+                        <strong id="cap-u">0 J</strong>
+                    </div>
+                </div>
+
+                <div class="induction-explanation">
+                    <h4>Entenda o resultado</h4>
+                    <p id="cap-explanation"></p>
+                </div>
+            </div>
+
+            <div class="induction-card">
+                <h3>Resultados da associação</h3>
+
+                <div class="induction-result-grid">
+                    <div class="induction-result">
+                        <span>Série: capacitância equivalente</span>
+                        <strong id="cap-series-ceq">0 F</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Paralelo: capacitância equivalente</span>
+                        <strong id="cap-parallel-ceq">0 F</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Série: carga (igual nos dois) e tensões V1 ; V2</span>
+                        <strong id="cap-series-detail">—</strong>
+                    </div>
+                    <div class="induction-result">
+                        <span>Paralelo: tensão (igual nos dois) e cargas Q1 ; Q2</span>
+                        <strong id="cap-parallel-detail">—</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="induction-card">
+                <h3>Fórmulas utilizadas</h3>
+
+                <div class="induction-formula">
+                    <strong>Placas paralelas com dielétrico</strong>
+                    <span>C = κ · ε0 · A / d</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Carga</strong>
+                    <span>Q = C · V</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Energia armazenada</strong>
+                    <span>U = ½ · C · V²</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Série</strong>
+                    <span>1/Ceq = 1/C1 + 1/C2</span>
+                </div>
+
+                <div class="induction-formula">
+                    <strong>Paralelo</strong>
+                    <span>Ceq = C1 + C2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page" id="calculator">
+    <div class="page-heading">
+        <span class="eyebrow">FERRAMENTA · CÁLCULO</span>
+        <h2>Calculadora de fórmulas</h2>
+        <p>Escolha uma fórmula, selecione a grandeza que deseja calcular e preencha as demais. Aceita vírgula ou ponto e notação científica (ex.: 1,6e-19).</p>
+    </div>
+
+    <div class="calc-layout">
+        <aside class="simulator-panel calc-sidebar">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">BIBLIOTECA</span>
+                    <h3>Fórmulas</h3>
+                </div>
+            </div>
+            <div class="calc-formula-list" id="calc-formulas"></div>
+        </aside>
+
+        <div class="calc-main">
+            <div class="simulator-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">FÓRMULA SELECIONADA</span>
+                        <h3 id="calc-formula-title">—</h3>
+                    </div>
+                    <span class="diagram-badge" id="calc-formula-expr">—</span>
+                </div>
+
+                <span class="calc-section-label">O que você quer calcular?</span>
+                <div class="calc-targets" id="calc-targets"></div>
+
+                <div class="control-divider"></div>
+
+                <div class="calc-inputs" id="calc-inputs"></div>
+
+                <button class="primary-button calc-save" id="calc-save">
+                    Salvar no histórico <span>↵</span>
+                </button>
+            </div>
+
+            <div class="calc-output">
+                <div class="result-card highlight-result calc-result">
+                    <span class="result-label" id="calc-result-label">RESULTADO</span>
+                    <strong id="calc-result-value">—</strong>
+                    <div class="calc-steps" id="calc-steps"></div>
+                </div>
+
+                <div class="simulator-panel calc-history-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">REGISTRO</span>
+                            <h3>Histórico</h3>
+                        </div>
+                        <button class="text-button" id="calc-clear-history">Limpar</button>
+                    </div>
+                    <ul class="calc-history" id="calc-history"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page" id="exercises">
+    <div class="page-heading">
+        <span class="eyebrow">PRÁTICA · AUTOAVALIAÇÃO</span>
+        <h2>Exercícios</h2>
+        <p>Questões numéricas com valores sorteados a cada rodada, mais questões conceituais. Seu desempenho fica salvo neste navegador.</p>
+    </div>
+
+    <div class="exercise-topics">
+        <button class="exercise-topic active" data-topic="all">Todos os temas</button>
+        <button class="exercise-topic" data-topic="electrostatics">± Eletrostática</button>
+        <button class="exercise-topic" data-topic="capacitors">⫴ Capacitores</button>
+        <button class="exercise-topic" data-topic="circuits">ϟ Circuitos</button>
+        <button class="exercise-topic" data-topic="magnetism">◎ Magnetismo</button>
+        <button class="exercise-topic" data-topic="induction">↝ Indução</button>
+    </div>
+
+    <div class="exercise-layout">
+        <div class="simulator-panel exercise-card" id="exercise-card">
+            <div class="exercise-meta">
+                <span class="theory-area blue" id="exercise-tag">—</span>
+                <span class="exercise-type" id="exercise-type">—</span>
+            </div>
+
+            <p class="exercise-statement" id="exercise-statement"></p>
+
+            <div id="exercise-answer"></div>
+
+            <div class="exercise-hint-box" id="exercise-hint-box" hidden></div>
+
+            <div class="exercise-feedback" id="exercise-feedback" hidden></div>
+
+            <div class="exercise-actions">
+                <button class="text-button" id="exercise-hint">💡 Ver dica</button>
+                <div class="exercise-actions-right">
+                    <button class="secondary-button" id="exercise-next">Pular / próxima →</button>
+                    <button class="primary-button" id="exercise-check">Verificar <span>✓</span></button>
+                </div>
+            </div>
+        </div>
+
+        <aside class="exercise-stats">
+            <div class="simulator-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">DESEMPENHO</span>
+                        <h3>Suas estatísticas</h3>
+                    </div>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat"><strong id="stat-correct">0</strong><span>Acertos</span></div>
+                    <div class="stat"><strong id="stat-total">0</strong><span>Respondidas</span></div>
+                    <div class="stat"><strong id="stat-accuracy">—</strong><span>Aproveitamento</span></div>
+                    <div class="stat"><strong id="stat-streak">0</strong><span>Sequência atual</span></div>
+                </div>
+
+                <div class="stat-best">🏆 Melhor sequência: <strong id="stat-best">0</strong></div>
+
+                <div class="control-divider"></div>
+
+                <span class="calc-section-label">Por tema</span>
+                <div id="exercise-topic-stats"></div>
+
+                <button class="reset-button" id="exercise-reset-stats">↻ Zerar estatísticas</button>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<section class="page" id="theory">
+    <div class="page-heading">
+        <span class="eyebrow">BASE CIENTÍFICA</span>
+        <h2>Referencial teórico</h2>
+        <p>Conceitos, equações e grandezas usados nas simulações. Use a busca para encontrar um tema ou uma fórmula.</p>
+    </div>
+
+    <div class="simulator-panel theory-toolbar">
+        <div class="theory-search">
+            <span>⌕</span>
+            <input type="search" id="theory-search" placeholder="Buscar por tema, fórmula ou grandeza (ex.: fluxo, Ohm, μ0)…">
+        </div>
+        <div class="theory-filters">
+            <button class="theory-filter active" data-filter="all">Todos</button>
+            <button class="theory-filter" data-filter="electrostatics">Eletrostática</button>
+            <button class="theory-filter" data-filter="capacitors">Capacitores</button>
+            <button class="theory-filter" data-filter="circuits">Circuitos</button>
+            <button class="theory-filter" data-filter="magnetism">Magnetismo</button>
+            <button class="theory-filter" data-filter="induction">Indução</button>
+            <span class="theory-count" id="theory-count"></span>
+        </div>
+    </div>
+
+    <div class="theory-list" id="theory-list"></div>
+
+    <div class="placeholder-panel theory-empty" id="theory-empty" hidden>
+        <div class="placeholder-icon">⌕</div>
+        <h3>Nenhum tópico encontrado</h3>
+        <p>Tente outro termo de busca ou altere o filtro.</p>
+    </div>
+
+    <div class="simulator-panel details-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">REFERÊNCIA RÁPIDA</span>
+                <h3>Constantes físicas</h3>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="circuit-table">
+                <thead>
+                    <tr><th>Constante</th><th>Símbolo</th><th>Valor</th><th>Unidade</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Carga elementar</td><td>e</td><td>1,602 × 10⁻¹⁹</td><td>C</td></tr>
+                    <tr><td>Permeabilidade do vácuo</td><td>μ0</td><td>4π × 10⁻⁷</td><td>T·m/A</td></tr>
+                    <tr><td>Permissividade do vácuo</td><td>ε0</td><td>8,854 × 10⁻¹²</td><td>F/m</td></tr>
+                    <tr><td>Constante eletrostática</td><td>k</td><td>8,99 × 10⁹</td><td>N·m²/C²</td></tr>
+                    <tr><td>Massa do elétron</td><td>me</td><td>9,109 × 10⁻³¹</td><td>kg</td></tr>
+                    <tr><td>Massa do próton</td><td>mp</td><td>1,673 × 10⁻²⁷</td><td>kg</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="simulator-panel details-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">SISTEMA INTERNACIONAL</span>
+                <h3>Grandezas e unidades</h3>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="circuit-table">
+                <thead>
+                    <tr><th>Grandeza</th><th>Símbolo</th><th>Unidade</th><th>Equivalência</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Corrente elétrica</td><td>I</td><td>ampère (A)</td><td>1 A = 1 C/s</td></tr>
+                    <tr><td>Tensão elétrica</td><td>U</td><td>volt (V)</td><td>1 V = 1 J/C</td></tr>
+                    <tr><td>Resistência</td><td>R</td><td>ohm (Ω)</td><td>1 Ω = 1 V/A</td></tr>
+                    <tr><td>Potência</td><td>P</td><td>watt (W)</td><td>1 W = 1 J/s</td></tr>
+                    <tr><td>Campo magnético</td><td>B</td><td>tesla (T)</td><td>1 T = 1 N/(A·m) = 10⁴ G</td></tr>
+                    <tr><td>Fluxo magnético</td><td>Φ</td><td>weber (Wb)</td><td>1 Wb = 1 T·m²</td></tr>
+                    <tr><td>Força eletromotriz</td><td>ε</td><td>volt (V)</td><td>1 V = 1 Wb/s</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+    </div>
+
+    <footer class="main-footer">
+        <span>PHYSICS LAB © 2026</span>
+        <span>Laboratório Interativo de Física III</span>
+    </footer>
+
+</main>
+</div>
+</body>
+</html>
