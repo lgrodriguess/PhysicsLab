@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Campos de entrada e resultados do módulo de indução
     const fieldInitialInput = document.getElementById("induction-field-initial");
     const fieldFinalInput = document.getElementById("induction-field-final");
     const areaInput = document.getElementById("induction-area");
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Calcula o fluxo e a FEM induzida
     function calculate() {
         const fieldInitial = Number(fieldInitialInput.value);
         const fieldFinal = Number(fieldFinalInput.value);
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             angleFinal
         ];
 
+        // Confere se nenhum campo está vazio ou fora do limite
         if (values.some(value => !Number.isFinite(value)) ||
             values.some((value, index) => {
                 const input = [
@@ -84,13 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Converte cm² -> m² e graus -> radianos
         const areaM2 = area / 10000;
         const initialRadians = angleInitial * Math.PI / 180;
         const finalRadians = angleFinal * Math.PI / 180;
 
+        // Φ = B · A · cos(θ)
         const fluxInitial = fieldInitial * areaM2 * Math.cos(initialRadians);
         const fluxFinal = fieldFinal * areaM2 * Math.cos(finalRadians);
         const fluxChange = fluxFinal - fluxInitial;
+        // Lei de Faraday-Lenz: ε = -N · ΔΦ / Δt
         const emf = -turns * fluxChange / time;
 
         fluxInitialResult.textContent = `${formatNumber(fluxInitial)} Wb`;
@@ -98,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fluxChangeResult.textContent = `${formatNumber(fluxChange)} Wb`;
         emfResult.textContent = `${formatNumber(emf)} V`;
 
+        // Explicação pela Lei de Lenz (o sinal mostra se o fluxo subiu ou desceu)
         if (fluxChange > 0) {
             explanation.textContent = "O fluxo magnético aumentou. Pela Lei de Lenz, a corrente induzida produz um campo magnético que se opõe a esse aumento.";
         } else if (fluxChange < 0) {
@@ -106,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             explanation.textContent = "O fluxo magnético não sofreu variação. Portanto, não existe força eletromotriz induzida nesse intervalo.";
         }
 
+        // Gira a espira no desenho conforme o ângulo final
         coil.setAttribute("transform", `rotate(${angleFinal - 90} 300 150)`);
         visualValue.textContent = `Campo final: ${formatNumber(fieldFinal)} T | Ângulo final: ${angleFinal}°`;
 
@@ -114,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fieldArrows.setAttribute("fill", fieldColor);
     }
 
+    // Volta pros valores padrão
     function reset() {
         fieldInitialInput.value = defaults.fieldInitial;
         fieldFinalInput.value = defaults.fieldFinal;
@@ -126,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         calculate();
     }
 
+    // Recalcula sempre que algum campo muda
     [
         fieldInitialInput,
         fieldFinalInput,

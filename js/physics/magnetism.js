@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Campos de entrada e resultados do módulo de magnetismo
     const chargeInput = document.getElementById("mag-charge");
     const velocityInput = document.getElementById("mag-velocity");
     const massInput = document.getElementById("mag-mass");
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     }
 
+    // Desenha os ⊗ do campo magnético entrando na tela
     function drawField() {
         let points = "";
 
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fieldPoints.innerHTML = points;
     }
 
+    // Desenha a trajetória: reta, círculo ou hélice, dependendo do ângulo
     function drawTrajectory(angle, charge, velocity, field) {
         let path = "";
         let x = 300;
@@ -78,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         angleLabel.textContent = `Ângulo de entrada: ${angle}°`;
     }
 
+    // Faz os cálculos da força magnética e do raio
     function calculate() {
         const charge = Number(chargeInput.value);
         const velocity = Number(velocityInput.value);
@@ -87,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const values = [charge, velocity, mass, field, angle];
 
+        // Confere se os valores estão dentro dos limites
         if (values.some(value => !Number.isFinite(value)) ||
             charge < -10 || charge > 10 ||
             velocity < 0 || velocity > 100 ||
@@ -97,12 +102,15 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Converte µC -> C e mg -> kg
         const chargeCoulombs = Math.abs(charge) * 0.000001;
         const velocityPerpendicular = velocity * Math.sin(angle * Math.PI / 180);
         const massKg = mass * 0.000001;
 
+        // F = |q| · v · B · sen(θ)
         const force = chargeCoulombs * velocity * field * Math.sin(angle * Math.PI / 180);
 
+        // r = m · v⊥ / (|q| · B)
         let radius = null;
 
         if (chargeCoulombs > 0 && field > 0 && velocityPerpendicular > 0) {
@@ -118,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
             radiusResult.textContent = `${formatNumber(radius)} m`;
         }
 
+        // Define o tipo de movimento a partir do ângulo e da força
         let motion = "";
 
         if (velocity === 0) {
@@ -130,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
             motion = "Helicoidal";
         }
 
+        // Texto explicando o resultado
         motionResult.textContent = motion;
 
         if (velocity === 0) {
@@ -149,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         drawTrajectory(angle, charge, velocity, field);
     }
 
+    // Volta pros valores padrão
     function reset() {
         chargeInput.value = defaults.charge;
         velocityInput.value = defaults.velocity;
@@ -159,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         calculate();
     }
 
+    // Recalcula sempre que algum campo muda
     [chargeInput, velocityInput, massInput, fieldInput, angleInput].forEach(input => {
         input.addEventListener("input", calculate);
     });

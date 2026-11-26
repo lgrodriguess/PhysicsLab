@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Pega os sliders e elementos da página de circuitos
     const voltageInput = document.getElementById("circuit-voltage");
 
     if (!voltageInput) return;
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         resistances: [10, 20, 30]
     };
 
+    // Tipo de circuito escolhido (série, paralelo ou misto)
     let selectedCircuit = "series";
 
     function format(value, decimals = 2) {
@@ -43,12 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    // Calcula Req, corrente total e os valores de cada resistor
     function calculateCircuit(voltage, resistances, type) {
         const activeResistances = type === "mixed" ? resistances : resistances.slice(0, 2);
         let equivalentResistance = 0;
         let totalCurrent = 0;
         const components = [];
 
+        // Série: Req = soma dos R, e a corrente é a mesma em todos
         if (type === "series") {
             equivalentResistance = activeResistances.reduce(
                 (total, activeResistances) => total + activeResistances,
@@ -74,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+        // Paralelo: 1/Req = soma de 1/R, e a tensão é a mesma em todos
         else if (type === "parallel") {
             const inverseSum = activeResistances.reduce(
                 (total, activeResistances) => total + (1 / activeResistances),
@@ -100,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+        // Misto: R1 em série com (R2 // R3)
         else if (type === "mixed") {
 
             const parallelResistance =
@@ -111,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             totalCurrent = voltage / equivalentResistance;
 
+            // A tensão que sobra depois de R1 fica no trecho em paralelo
             const voltageR1 = totalCurrent * resistances[0];
 
             const parallelVoltage = voltage - voltageR1;
@@ -154,6 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    // Mostra os resultados nos cards e monta a tabela dos resistores
     function updateResults(results) {
 
         updateText(
@@ -204,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    // Desenha o zigue-zague do resistor no SVG (deitado)
     function resistorHorizontal(x, y, name) {
         return `
             <path class="circuit-resistor"
@@ -224,6 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
+    // Mesmo resistor, só que em pé (usado no paralelo)
     function resistorVertical(x, y, name) {
         return `
             <path class="circuit-resistor"
@@ -244,6 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    // Desenha o símbolo da bateria
     function battery(x, y) {
 
         return `
@@ -264,6 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    // Monta o diagrama do circuito de acordo com o tipo escolhido
     function drawCircuit(resistances, voltage) {
 
         let drawing = "";
@@ -377,6 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
+    // Lê os valores, recalcula e redesenha tudo
     function updateSimulation() {
 
         const parameters = getParameters();
@@ -403,6 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
         drawCircuit(resistances, voltage);
     }
 
+    // Botões de série / paralelo / misto (R3 só aparece no misto)
     circuitButtons.forEach(button => {
 
         button.addEventListener("click", () => {
@@ -422,12 +436,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Recalcula sempre que mexer em algum slider
     voltageInput.addEventListener("input", updateSimulation);
 
     resistanceInputs.forEach(input => {
         input.addEventListener("input", updateSimulation);
     });
 
+    // Botão de resetar volta pros valores padrão
     document.getElementById("reset-circuit")
         .addEventListener("click", () => {
 

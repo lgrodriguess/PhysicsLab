@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Referencial teórico: lista de conceitos com busca e filtro
     const list = document.getElementById("theory-list");
     if (!list) return;
 
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyState = document.getElementById("theory-empty");
     const counter = document.getElementById("theory-count");
 
+    // Nome, cor e página do simulador de cada área
     const areas = {
         electrostatics: { label: "Eletrostática", color: "green", page: "electrostatics" },
         capacitors: { label: "Capacitores", color: "teal", page: "capacitors" },
@@ -18,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         induction: { label: "Indução", color: "orange", page: "induction" }
     };
 
+    // Conteúdo teórico: resumo, fórmulas e uma dica de cada assunto
     const topics = [
         {
             area: "electrostatics",
@@ -397,10 +400,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let activeFilter = "all";
 
+    // Tira acentos e deixa minúsculo, pra busca achar "indução" digitando "inducao"
     function normalize(text) {
         return text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
     }
 
+    // Filtra os tópicos pela área e pelo texto da busca e mostra na tela
     function render() {
         const query = normalize(searchInput.value);
 
@@ -442,6 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counter.textContent = `${visible.length} ${visible.length === 1 ? "tópico" : "tópicos"}`;
     }
 
+    // Botões de filtro por área
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
             activeFilter = button.dataset.filter;

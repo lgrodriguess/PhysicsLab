@@ -1,5 +1,7 @@
+// Funções e constantes usadas por vários arquivos do site
 window.PhysicsUtils = (() => {
 
+    // Constantes físicas (SI)
     const constants = {
         mu0: 4 * Math.PI * 1e-7,
         k: 8.9875e9,
@@ -10,6 +12,7 @@ window.PhysicsUtils = (() => {
         g: 9.8
     };
 
+    // Prefixos do SI usados pra formatar os resultados (k, m, µ, n...)
     const prefixes = [
         { symbol: "G", factor: 1e9 },
         { symbol: "M", factor: 1e6 },
@@ -21,6 +24,7 @@ window.PhysicsUtils = (() => {
         { symbol: "p", factor: 1e-12 }
     ];
 
+    // Formata número no padrão brasileiro (vírgula); muito pequeno ou grande vira notação científica
     function formatNumber(value, maxDecimals = 4) {
         if (!Number.isFinite(value)) return "—";
 
@@ -32,6 +36,7 @@ window.PhysicsUtils = (() => {
         return value.toLocaleString("pt-BR", { maximumFractionDigits: maxDecimals });
     }
 
+    // Escolhe o melhor prefixo pro valor (ex: 0,002 A -> 2 mA)
     function formatSI(value, unit) {
         if (!Number.isFinite(value)) return "—";
         if (!unit || unit === "°" || unit === "espiras" || value === 0) {
@@ -44,6 +49,7 @@ window.PhysicsUtils = (() => {
         return `${formatNumber(value / prefix.factor, 3)} ${prefix.symbol}${unit}`;
     }
 
+    // Converte o texto digitado em número (aceita vírgula)
     function parseNumber(text) {
         if (typeof text !== "string") return NaN;
         const cleaned = text.trim().replace(/\s/g, "").replace(",", ".");
@@ -51,6 +57,7 @@ window.PhysicsUtils = (() => {
         return Number(cleaned);
     }
 
+    // Sorteios usados nos exercícios
     function randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -68,6 +75,7 @@ window.PhysicsUtils = (() => {
         return copy;
     }
 
+    // Salva e carrega dados do localStorage (histórico e estatísticas)
     function storage(key, fallback) {
         return {
             load() {
@@ -87,6 +95,7 @@ window.PhysicsUtils = (() => {
         };
     }
 
+    // Evita que texto digitado seja lido como HTML
     function escapeHTML(text) {
         return String(text)
             .replace(/&/g, "&amp;")

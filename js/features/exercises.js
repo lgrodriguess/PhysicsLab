@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Exercícios: questões numéricas sorteadas e questões conceituais
     const card = document.getElementById("exercise-card");
     if (!card) return;
 
@@ -36,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const kC = constants.k;
     const eps0 = constants.epsilon0;
 
+    // Questões numéricas: cada build() sorteia valores, calcula a resposta e monta a resolução
     const generators = [
         {
             topic: "circuits",
@@ -935,6 +937,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
+    // Questões conceituais (múltipla escolha). "correct" é o índice da alternativa certa
     const conceptual = [
         {
             topic: "circuits",
@@ -1204,6 +1207,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
+    // Estatísticas salvas no navegador (acertos, total, sequência e por tema)
     const statsStore = storage("physicslab.exercises.stats", null);
     const emptyStats = () => ({
         correct: 0,
@@ -1230,6 +1234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let answered = false;
     let lastKey = "";
 
+    // Atualiza os números e as barrinhas de desempenho por tema
     function updateStats() {
         statCorrect.textContent = stats.correct;
         statTotal.textContent = stats.total;
@@ -1251,6 +1256,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join("");
     }
 
+    // Sorteia uma questão do tema escolhido (60% numérica, 40% conceitual), sem repetir a anterior
     function newQuestion() {
         const numeric = generators.filter(g => activeTopic === "all" || g.topic === activeTopic);
         const concepts = conceptual.filter(c => activeTopic === "all" || c.topic === activeTopic);
@@ -1284,6 +1290,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderQuestion();
     }
 
+    // Mostra a questão: campo de resposta (numérica) ou alternativas embaralhadas (conceitual)
     function renderQuestion() {
         tagEl.textContent = topicNames[question.topic];
         tagEl.className = `theory-area ${{ electrostatics: "green", capacitors: "teal", circuits: "blue", magnetism: "purple", induction: "orange" }[question.topic]}`;
@@ -1327,6 +1334,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Conta o acerto/erro e atualiza a sequência
     function register(isCorrect) {
         stats.total++;
         stats.byTopic[question.topic].total++;
@@ -1344,6 +1352,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateStats();
     }
 
+    // Mostra se acertou e a resolução
     function showFeedback(isCorrect, bodyHTML) {
         feedbackEl.hidden = false;
         feedbackEl.classList.add(isCorrect ? "correct" : "wrong");
@@ -1356,6 +1365,7 @@ document.addEventListener("DOMContentLoaded", () => {
         answered = true;
     }
 
+    // Corrige a questão numérica aceitando uma margem de ±2%
     function checkAnswer() {
         if (answered || !question) return;
 
@@ -1383,6 +1393,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Corrige a questão conceitual quando clica numa alternativa
     answerArea.addEventListener("click", event => {
         const option = event.target.closest("[data-option]");
         if (!option || answered || question.kind !== "choice") return;
@@ -1406,6 +1417,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hintBox.hidden = !hintBox.hidden;
     });
 
+    // Filtro por tema
     topicButtons.forEach(button => {
         button.addEventListener("click", () => {
             activeTopic = button.dataset.topic;
@@ -1414,6 +1426,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Zerar estatísticas (pede pra clicar duas vezes pra confirmar)
     resetStatsButton.addEventListener("click", () => {
         if (resetStatsButton.dataset.confirm !== "1") {
             resetStatsButton.dataset.confirm = "1";

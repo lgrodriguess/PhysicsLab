@@ -1,3 +1,4 @@
+/* Cores e medidas usadas no site todo */
 :root {
     --primary: #2563eb;
     --primary-dark: #1d4ed8;
@@ -39,6 +40,7 @@ button {
     min-height: 100vh;
 }
 
+/* Menu lateral */
 .sidebar {
     width: var(--sidebar-width);
     background: var(--surface);
@@ -176,6 +178,7 @@ button {
     flex-direction: column;
 }
 
+/* Barra do topo */
 .topbar {
     height: 75px;
     background: var(--surface);
@@ -235,6 +238,7 @@ button {
     flex: 1;
 }
 
+/* Só a página com a classe "active" aparece */
 .page {
     display: none;
     animation: pageAppear 0.3s ease;
@@ -265,6 +269,7 @@ button {
     margin-bottom: 12px;
 }
 
+/* Página inicial */
 .welcome-section {
     background: linear-gradient(110deg, #ffffff 40%, #eff6ff 100%);
     border: 1px solid #e3ebf8;
@@ -604,6 +609,7 @@ button {
     color: var(--text-secondary);
 }
 
+/* Rodapé */
 .main-footer {
     padding: 20px 42px;
     border-top: 1px solid var(--border);
@@ -614,6 +620,7 @@ button {
     background: white;
 }
 
+/* Ajustes pra telas menores (celular e tablet) */
 @media (max-width: 1200px) {
     .module-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -765,6 +772,7 @@ button {
     font-weight: 800;
 }
 
+/* Circuitos */
 .circuit-types {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -811,6 +819,7 @@ button {
     font-size: 10px;
 }
 
+/* Layout padrão dos simuladores (controles + desenho + resultados) */
 .simulator-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(270px, 0.8fr);
@@ -1162,6 +1171,7 @@ button {
     }
 }
 
+/* Magnetismo */
 .magnetism-layout {
     display: grid;
     grid-template-columns: 320px 1fr;
@@ -1340,6 +1350,7 @@ button {
     }
 }
 
+/* Indução */
 .induction-layout {
     display: grid;
     grid-template-columns: 320px 1fr;
@@ -1552,6 +1563,7 @@ button {
     background: #fef2f2;
 }
 
+/* Calculadora */
 .calc-layout {
     display: grid;
     grid-template-columns: 270px minmax(0, 1fr);
@@ -1851,6 +1863,7 @@ button {
 }
 
 .exercise-topics,
+/* Referencial teórico */
 .theory-filters {
     display: flex;
     flex-wrap: wrap;
@@ -1887,6 +1900,7 @@ button {
     color: white;
 }
 
+/* Exercícios */
 .exercise-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 300px;

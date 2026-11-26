@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Módulo de capacitores de placas paralelas
     const svg = document.getElementById("cap-svg");
     if (!svg) return;
 
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const NS = "http://www.w3.org/2000/svg";
 
+    // Lê os campos e retorna null se algum valor for inválido
     function read() {
         const v = {};
         for (const [key, input] of Object.entries(inputs)) {
@@ -38,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return v;
     }
 
+    // Desenha o capacitor: placas, dielétrico, cargas e campo
     function draw(v, r) {
         const gap = 22 + v.dist * 6;
         const top = 150 - gap / 2 - 10;
@@ -53,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         diel.setAttribute("height", gap);
         diel.setAttribute("opacity", v.kappa > 1 ? Math.min(0.55, 0.15 + Math.log10(v.kappa) * 0.2) : 0);
 
-        // Sinais de carga proporcionais à carga (escala logarítmica suave)
+        // Quanto mais carga, mais sinais de + e − aparecem nas placas
         const count = Math.max(2, Math.min(12, Math.round(2 + Math.log10(Math.max(r.Q, 1e-12) / 1e-12) * 1.1)));
         let signs = "";
         for (let i = 0; i < count; i++) {
@@ -82,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el("cap-wires").innerHTML = wires + (connected ? "" : `<line x1="300" y1="36" x2="326" y2="20" stroke="#dc2626"/>`);
     }
 
+    // Função principal: calcula tudo e atualiza a tela
     function update() {
         const v = read();
         const explanation = el("cap-explanation");
@@ -90,12 +94,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Converte cm² -> m² e mm -> m, e calcula C0 = ε0·A/d e C = κ·C0
         const A = v.area / 1e4;
         const d = v.dist / 1000;
         const C0 = eps0 * A / d;
         const C = v.kappa * C0;
 
         let Q, V;
+        // Bateria ligada: V fica fixo. Bateria desligada: Q fica fixo
         if (mode.value === "connected") {
             V = v.voltage;
             Q = C * V;
@@ -104,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             V = Q / C;
         }
 
+        // Campo entre as placas (E = V/d) e energia (U = C·V²/2)
         const E = V / d;
         const U = 0.5 * C * V * V;
 
@@ -126,9 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 : "Sem dielétrico, nada mudou em relação ao capacitor carregado. Aumente κ para ver a tensão cair com a carga constante.";
         }
 
-        // Associação
+        // Associação de dois capacitores: série e paralelo
         const c1 = v.c1 * 1e-6;
         const c2 = v.c2 * 1e-6;
+        // Série: 1/Ceq = 1/C1 + 1/C2   |   Paralelo: Ceq = C1 + C2
         const cs = c1 * c2 / (c1 + c2);
         const cp = c1 + c2;
         const qs = cs * v.assocV;
@@ -143,11 +151,13 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.values(inputs).forEach(input => input.addEventListener("input", update));
     mode.addEventListener("change", update);
 
+    // Ao escolher um material, coloca o κ dele no campo
     material.addEventListener("change", () => {
         if (material.value !== "custom") inputs.kappa.value = material.value;
         update();
     });
 
+    // Se digitar um κ que bate com algum material, seleciona ele na lista
     inputs.kappa.addEventListener("input", () => {
         const match = [...material.options].find(o => o.value !== "custom" && Number(o.value) === Number(inputs.kappa.value));
         material.value = match ? match.value : "custom";
