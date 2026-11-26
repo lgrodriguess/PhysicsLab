@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Calculadora: escolhe uma fórmula e calcula qualquer variável a partir das outras
     const formulaList = document.getElementById("calc-formulas");
     if (!formulaList) return;
 
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const historyList = document.getElementById("calc-history");
     const clearHistoryButton = document.getElementById("calc-clear-history");
 
+    // sen e cos recebendo o ângulo em graus
     const deg = Math.PI / 180;
     const sin = a => Math.sin(a * deg);
     const cos = a => Math.cos(a * deg);
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const kC = constants.k;
     const eps0 = constants.epsilon0;
 
+    // Lista de fórmulas. Cada uma tem as variáveis (vars) e, em solve, a fórmula já isolada pra cada variável
     const formulas = [
         {
             id: "ohm",
@@ -773,12 +776,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
+    // Histórico salvo no navegador e qual fórmula/variável está selecionada
     const historyStore = storage("physicslab.calc.history", []);
     let history = historyStore.load();
     let current = formulas[0];
     let target = Object.keys(current.vars)[0];
     const inputValues = {};
 
+    // Monta a lista de fórmulas na lateral, separada por área
     function renderFormulaList() {
         let lastArea = "";
         formulaList.innerHTML = formulas.map(f => {
@@ -794,6 +799,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join("");
     }
 
+    // Botões pra escolher qual variável calcular
     function renderTargets() {
         targetContainer.innerHTML = Object.entries(current.vars).map(([key, meta]) => `
             <button class="calc-target ${key === target ? "active" : ""}" data-target="${key}">
@@ -802,6 +808,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `).join("");
     }
 
+    // Caixinha de prefixo (k, m, µ...) do lado de cada campo
     function prefixOptions(meta) {
         if (meta.angle || meta.noPrefix) return "";
         return `
@@ -813,6 +820,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
+    // Cria os campos só das variáveis conhecidas (a que vai ser calculada fica de fora)
     function renderInputs() {
         inputsContainer.innerHTML = Object.entries(current.vars)
             .filter(([key]) => key !== target)
@@ -838,6 +846,7 @@ document.addEventListener("DOMContentLoaded", () => {
         calculate();
     }
 
+    // Mostra o histórico dos últimos cálculos
     function renderHistory() {
         if (history.length === 0) {
             historyList.innerHTML = `<li class="calc-history-empty">Nenhum cálculo ainda. Os resultados aparecem aqui.</li>`;
@@ -854,6 +863,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `).join("");
     }
 
+    // Lê os campos e já multiplica pelo prefixo, deixando tudo no SI
     function readValues() {
         const values = {};
         const missing = [];
@@ -884,6 +894,7 @@ document.addEventListener("DOMContentLoaded", () => {
         stepsBox.innerHTML = `<p class="calc-hint">${message}</p>`;
     }
 
+    // Usa a fórmula isolada da variável escolhida e mostra o passo a passo
     function calculate() {
         const { values, missing } = readValues();
 
@@ -926,6 +937,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return { formatted };
     }
 
+    // Guarda o resultado no histórico (no máximo 8)
     function saveToHistory() {
         const result = calculate();
         if (!result) return;
@@ -942,6 +954,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderHistory();
     }
 
+    // Clicou numa fórmula: troca a fórmula atual
     formulaList.addEventListener("click", event => {
         const button = event.target.closest("[data-formula]");
         if (!button) return;
@@ -952,6 +965,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderInputs();
     });
 
+    // Clicou numa variável: passa a calcular ela
     targetContainer.addEventListener("click", event => {
         const button = event.target.closest("[data-target]");
         if (!button) return;
@@ -960,6 +974,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderInputs();
     });
 
+    // Calcula enquanto digita; Enter ou o botão salvam no histórico
     inputsContainer.addEventListener("input", calculate);
     inputsContainer.addEventListener("change", calculate);
 

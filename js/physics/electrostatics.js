@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Módulo de eletrostática: duas cargas no eixo x e um ponto P
     const svg = document.getElementById("es-svg");
     if (!svg) return;
 
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const defaults = { q1: 5, q2: -5, d: 40, px: 20, py: 15 };
 
-    // Mundo em cm; escala e origem da imagem em pixels
+    // Posições em cm; S é a escala e (OX, OY) é a origem no desenho
     const S = 4.6;
     const OX = 116;
     const OY = 160;
@@ -45,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const toPx = (x, y) => [OX + S * x, OY - S * y];
 
+    // Lê os campos e retorna null se algum valor for inválido
     function readValues() {
         const v = {};
         for (const [key, el] of Object.entries(inputs)) {
@@ -57,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return v;
     }
 
-    // Campo (N/C) e potencial (V) em um ponto (cm), com cargas em nC
+    // Calcula o campo E e o potencial V num ponto, somando o efeito de cada carga
+    // E = k·q/r²  e  V = k·q/r  (cargas em nC, distâncias em cm)
     function fieldAt(charges, x, y) {
         let ex = 0, ey = 0, V = 0;
         for (const c of charges) {
@@ -74,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return { ex, ey, V };
     }
 
+    // Segue a direção do campo passo a passo pra desenhar uma linha de campo
     function traceLine(charges, start, sign) {
         const pts = [[start.x, start.y]];
         let x = start.x, y = start.y;
@@ -90,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return pts;
     }
 
+    // Desenha as linhas de campo saindo das cargas (com setinhas no meio)
     function drawFieldLines(charges) {
         g.lines.innerHTML = "";
         g.arrows.innerHTML = "";
@@ -132,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
         g.arrows.innerHTML = heads;
     }
 
+    // Desenha as cargas: vermelha = positiva, azul = negativa
     function drawCharges(charges) {
         g.charges.innerHTML = charges.map((c, i) => {
             const [x, y] = toPx(c.x, c.y);
@@ -145,7 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join("");
     }
 
-    // Marching squares: curva de potencial constante igual ao de P
+    // Desenha a linha equipotencial que passa por P
+    // (procura na grade os pontos onde o potencial é igual ao de P)
     function drawEquipotential(charges, level) {
         const step = 1;
         const nx = Math.round((X_MAX - X_MIN) / step);
@@ -187,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
         g.equi.setAttribute("d", d);
     }
 
+    // Desenha o ponto P e a seta do campo elétrico nele
     function drawProbe(v, f) {
         const [x, y] = toPx(v.px, v.py);
         g.probe.setAttribute("cx", x);
@@ -218,6 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ].map(p => p.join(",")).join(" "));
     }
 
+    // Monta o texto explicando o resultado
     function explain(v, f) {
         const mag = Math.hypot(f.ex, f.ey);
         if (!mag) {
@@ -234,6 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return text;
     }
 
+    // Função principal: calcula tudo e atualiza a tela
     function update() {
         const v = readValues();
         if (!v) {
@@ -256,6 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
         out.eAngle.textContent = mag ? `${formatNumber(angle, 1)}°` : "—";
         out.eComp.textContent = `${formatNumber(f.ex, 2)} ; ${formatNumber(f.ey, 2)} N/C`;
         out.potential.textContent = formatSI(f.V, "V");
+        // Força numa carga de prova de 1 nC: F = q·E
         out.force.textContent = formatSI(mag * 1e-9, "N");
         out.dist.textContent = `${formatNumber(r1, 1)} ; ${formatNumber(r2, 1)} cm`;
         out.explanation.textContent = explain(v, f);
@@ -266,6 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         drawProbe(v, f);
     }
 
+    // Recalcula sempre que algum campo muda
     Object.values(inputs).forEach(el => el.addEventListener("input", update));
 
     document.getElementById("es-reset").addEventListener("click", () => {

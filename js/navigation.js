@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pages = document.querySelectorAll(".page");
     const currentPage = document.getElementById("current-page");
 
+    // Nome que aparece no topo pra cada página
     const pageNames = {
         home: "Início",
         electrostatics: "Eletrostática",
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         theory: "Referencial teórico"
     };
 
+    // Troca a página visível (esconde as outras) e atualiza o menu e a URL
     function navigateTo(pageId, { updateHash = true } = {}) {
 
         const targetPage = document.getElementById(pageId);
@@ -49,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.navigateTo = navigateTo;
 
+    // Qualquer clique em item do menu (data-page) ou botão com data-go troca de página
     document.addEventListener("click", event => {
 
         const navItem = event.target.closest(".nav-item[data-page]");
@@ -64,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // Faz o botão "voltar" do navegador funcionar, lendo o # da URL
     function syncWithHash() {
         const pageId = location.hash.slice(1) || "home";
         navigateTo(pageId, { updateHash: false });
