@@ -1,0 +1,229 @@
+/* Menu lateral */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 30px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 10px;
+    margin-bottom: 52px;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-weight: 800;
+    border-radius: 12px;
+    box-shadow: 0 5px 14px #2563eb35;
+}
+
+.brand-text h1 {
+    font-size: 17px;
+    letter-spacing: -0.7px;
+    font-weight: 800;
+}
+
+.brand-text h1 span {
+    color: var(--primary);
+}
+
+.brand-text p {
+    font-size: 8px;
+    color: var(--text-light);
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.sidebar-section {
+    margin-bottom: 35px;
+}
+
+.section-label {
+    display: block;
+    font-size: 10px;
+    color: var(--text-light);
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    padding: 0 12px;
+    margin-bottom: 14px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--text-secondary);
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: #f5f8ff;
+    color: var(--primary);
+}
+
+.nav-item.active {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.nav-icon {
+    font-size: 20px;
+    width: 23px;
+    text-align: center;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 15px 8px 5px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 10px;
+}
+
+.status-indicator {
+    width: 7px;
+    height: 7px;
+    background: #22c55e;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.version {
+    margin-left: auto;
+    color: var(--text-light);
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    min-width: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra do topo */
+.topbar {
+    height: 75px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--text-light);
+}
+
+.breadcrumb strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.breadcrumb-divider {
+    color: #cbd5e1;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--text-secondary);
+}
+
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.page-container {
+    padding: 38px 42px;
+    flex: 1;
+}
+
+/* Só a página com a classe "active" aparece */
+.page {
+    display: none;
+    animation: pageAppear 0.3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes pageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.eyebrow {
+    display: block;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+

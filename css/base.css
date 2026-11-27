@@ -1,0 +1,42 @@
+/* Cores e medidas usadas no site todo */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+    --background: #f5f7fb;
+    --surface: #ffffff;
+    --border: #e8edf4;
+    --text: #172033;
+    --text-secondary: #64748b;
+    --text-light: #94a3b8;
+    --green: #16a36a;
+    --purple: #805ad5;
+    --orange: #e58a32;
+    --teal: #0e9aa7;
+    --sidebar-width: 255px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+

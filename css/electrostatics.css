@@ -1,0 +1,43 @@
+/* Eletrostática e capacitores */
+.sim-input select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 14px;
+    outline: none;
+}
+.sim-input select:focus {
+    border-color: var(--primary);
+}
+.es-legend-vector,
+.es-legend-equi {
+    display: inline-block;
+    width: 18px;
+    height: 0;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+.es-legend-vector {
+    border-top: 3px solid var(--green);
+}
+.es-legend-equi {
+    border-top: 2px dashed var(--orange);
+}
+
+.magnetism-input select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 14px;
+    outline: none;
+}
+.magnetism-input select:focus {
+    border-color: var(--primary);
+}
+

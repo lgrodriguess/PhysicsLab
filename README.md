@@ -143,14 +143,25 @@ PhysicsLab/
 ├── sw.js                   # Service worker (modo offline)
 ├── ROADMAP.md              # Planejamento da iniciação científica
 ├── css/
-│   └── style.css           # Estilos globais e de cada módulo
+│   ├── base.css            # Variáveis de cor e medidas
+│   ├── layout.css          # Menu lateral, barra do topo e páginas
+│   ├── home.css            # Página inicial, átomo animado e rodapé
+│   ├── responsive.css      # Ajustes para celular e tablet
+│   ├── simulators.css      # Circuitos, magnetismo e layout dos simuladores
+│   ├── calculator.css      # Calculadora
+│   ├── theory.css          # Referencial teórico
+│   ├── exercises.css       # Exercícios
+│   ├── electrostatics.css  # Eletrostática e capacitores
+│   ├── classroom.css       # Sala de aula, guia de estudo e modo projetor
+│   └── decorations.css     # Decorações de física
 ├── js/
 │   ├── main.js             # Inicialização
 │   ├── navigation.js       # Navegação entre páginas (SPA com hash)
 │   ├── utils.js            # Constantes, paleta de cores e funções compartilhadas
 │   ├── data/
 │   │   ├── formulas.js     # Fórmulas da calculadora (isoladas para cada variável)
-│   │   └── guides.js       # Textos dos guias de estudo e cenários prontos
+│   │   ├── guides.js       # Textos dos guias de estudo e cenários prontos
+│   │   └── exercise-bank.js # Banco de questões (numéricas e conceituais)
 │   ├── physics/
 │   │   ├── electrostatics.js # Cargas, campo e potencial
 │   │   ├── capacitors.js   # Capacitores e dielétricos
@@ -159,7 +170,7 @@ PhysicsLab/
 │   │   └── induction.js    # Indução eletromagnética
 │   └── features/
 │       ├── calculator.js   # Calculadora de fórmulas
-│       ├── exercises.js    # Gerador e corretor de exercícios
+│       ├── exercises.js    # Tela dos exercícios: sorteio, correção e estatísticas
 │       ├── theory.js       # Referencial teórico com busca
 │       └── classroom.js    # Cenários prontos, guia de estudo e modo projetor
 ├── tests/

@@ -1,0 +1,100 @@
+/* ================================================================
+   Decorações minimalistas com temas de física
+   Desenhos em traço fino e baixa opacidade, só de enfeite
+   (pointer-events: none, não atrapalham cliques).
+   ================================================================ */
+
+/* Fundo da área de conteúdo: pontinhos de "papel quadriculado" de laboratório */
+.page-container {
+    background-image: radial-gradient(circle, #d9e2ef 1px, transparent 1.3px);
+    background-size: 22px 22px;
+}
+
+/* Onda senoidal discreta no rodapé do menu lateral */
+.sidebar {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 225 40' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 20 Q12.5 0 25 20 T50 20 T75 20 T100 20 T125 20 T150 20 T175 20 T200 20 T225 20' stroke-opacity='.35'/%3E%3Cpath d='M0 20 Q25 -4 50 20 T100 20 T150 20 T200 20 T250 20' stroke-opacity='.18'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center bottom 64px;
+    background-size: 100% 34px;
+}
+
+/* Desenho de cada módulo ao lado do título da página */
+.page-heading {
+    position: relative;
+}
+
+.page-heading::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 230px;
+    height: 115px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Dipolo: linhas de campo entre + e − */
+#electrostatics .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='55' cy='60' r='11'/%3E%3Cpath d='M50 60 H60 M55 55 V65'/%3E%3Ccircle cx='185' cy='60' r='11'/%3E%3Cpath d='M180 60 H190'/%3E%3Cpath d='M66 60 H174'/%3E%3Cpath d='M64 52 Q120 18 176 52'/%3E%3Cpath d='M64 68 Q120 102 176 68'/%3E%3Cpath d='M60 49 Q120 -12 180 49' stroke-opacity='.6'/%3E%3Cpath d='M60 71 Q120 132 180 71' stroke-opacity='.6'/%3E%3Cpath d='M116 31 L122 35 L116 39'/%3E%3Cpath d='M116 81 L122 85 L116 89'/%3E%3Cpath d='M117 56 L123 60 L117 64'/%3E%3C/svg%3E");
+}
+
+/* Placas paralelas com campo uniforme */
+#capacitors .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 60 H96 M144 60 H220'/%3E%3Cpath d='M96 22 V98 M144 22 V98' stroke-width='3'/%3E%3Cpath d='M102 38 H136 M131 34 L137 38 L131 42'/%3E%3Cpath d='M102 60 H136 M131 56 L137 60 L131 64'/%3E%3Cpath d='M102 82 H136 M131 78 L137 82 L131 86'/%3E%3Cpath d='M84 30 H90 M87 27 V33 M84 90 H90 M87 87 V93'/%3E%3Cpath d='M150 30 H156 M150 90 H156'/%3E%3C/svg%3E");
+}
+
+/* Circuito com resistor e bateria */
+#circuits .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 30 H88 l5 -9 l10 18 l10 -18 l10 18 l10 -18 l10 18 l5 -9 H210 V95 H128 M112 95 H30 V30'/%3E%3Cpath d='M113 82 V108' stroke-width='2.4'/%3E%3Cpath d='M127 88 V102' stroke-width='2.4'/%3E%3Cpath d='M150 24 l6 6 l-6 6' stroke-opacity='.6'/%3E%3Cpath d='M62 89 l-6 6 l6 6' stroke-opacity='.6'/%3E%3C/svg%3E");
+}
+
+/* Carga em movimento circular num campo ⊗ */
+#magnetism .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='28' cy='24' r='6'/%3E%3Cpath d='M24.4 20.4 L31.6 27.6 M31.6 20.4 L24.4 27.6'/%3E%3Ccircle cx='28' cy='96' r='6'/%3E%3Cpath d='M24.4 92.4 L31.6 99.6 M31.6 92.4 L24.4 99.6'/%3E%3Ccircle cx='212' cy='24' r='6'/%3E%3Cpath d='M208.4 20.4 L215.6 27.6 M215.6 20.4 L208.4 27.6'/%3E%3Ccircle cx='212' cy='96' r='6'/%3E%3Cpath d='M208.4 92.4 L215.6 99.6 M215.6 92.4 L208.4 99.6'/%3E%3Ccircle cx='120' cy='104' r='5'/%3E%3Cpath d='M117.0 101.0 L123.0 107.0 M123.0 101.0 L117.0 107.0'/%3E%3Ccircle cx='120' cy='16' r='5'/%3E%3Cpath d='M117.0 13.0 L123.0 19.0 M123.0 13.0 L117.0 19.0'/%3E%3Ccircle cx='120' cy='60' r='32' stroke-dasharray='4 5'/%3E%3Ccircle cx='152' cy='60' r='5' fill='%232563eb' stroke='none'/%3E%3Cpath d='M152 52 V30 M148 35 L152 29 L156 35'/%3E%3Cpath d='M145 60 H132 M137 56 L131 60 L137 64'/%3E%3C/svg%3E");
+}
+
+/* Bobina e ímã em movimento */
+#induction .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='60' cy='60' rx='8' ry='28'/%3E%3Cellipse cx='75' cy='60' rx='8' ry='28'/%3E%3Cellipse cx='90' cy='60' rx='8' ry='28'/%3E%3Cellipse cx='105' cy='60' rx='8' ry='28'/%3E%3Cellipse cx='120' cy='60' rx='8' ry='28'/%3E%3Cpath d='M60 88 V104 H34 M120 88 V104 H146' stroke-opacity='.6'/%3E%3Crect x='156' y='48' width='62' height='24' rx='3'/%3E%3Cpath d='M187 48 V72'/%3E%3Cg fill='%232563eb' stroke='none' font-family='Arial, sans-serif' font-size='13' font-weight='700' text-anchor='middle'%3E%3Ctext x='171.5' y='65'%3EN%3C/text%3E%3Ctext x='202.5' y='65'%3ES%3C/text%3E%3C/g%3E%3Cpath d='M188 34 H160 M166 30 L160 34 L166 38'/%3E%3C/svg%3E");
+}
+
+/* Símbolos matemáticos */
+#calculator .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg fill='%232563eb' stroke='none' font-family='Georgia, serif' font-style='italic'%3E%3Ctext x='22' y='78' font-size='56'%3E%E2%88%91%3C/text%3E%3Ctext x='92' y='82' font-size='60'%3E%E2%88%AB%3C/text%3E%3Ctext x='140' y='76' font-size='48'%3E%CE%94%3C/text%3E%3Ctext x='192' y='72' font-size='34'%3E%CF%80%3C/text%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Pêndulo simples */
+#exercises .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M80 16 H160' stroke-width='2.4'/%3E%3Cpath d='M120 16 L149.9 84.8'/%3E%3Ccircle cx='153.9' cy='93.9' r='10'/%3E%3Cpath d='M120 16 V101' stroke-dasharray='3 5' stroke-opacity='.6'/%3E%3Cpath d='M77.5 89.6 A85 85 0 0 0 162.5 89.6' stroke-dasharray='4 5'/%3E%3Cpath d='M120 38 A22 22 0 0 0 128.8 36.2' stroke-opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* Átomo com órbitas */
+#theory .page-heading::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 120' fill='none' stroke='%232563eb' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='120' cy='60' rx='62' ry='20'/%3E%3Cellipse cx='120' cy='60' rx='62' ry='20' transform='rotate(60 120 60)'/%3E%3Cellipse cx='120' cy='60' rx='62' ry='20' transform='rotate(-60 120 60)'/%3E%3Ccircle cx='120' cy='60' r='6' fill='%232563eb' stroke='none'/%3E%3Ccircle cx='182' cy='60' r='3.5' fill='%232563eb' stroke='none'/%3E%3C/svg%3E");
+}
+
+/* Título não passa por cima do desenho */
+@media (min-width: 1101px) {
+    .page-heading {
+        padding-right: 250px;
+        min-height: 96px;
+    }
+}
+
+/* Em telas menores o desenho some para não apertar o texto */
+@media (max-width: 1100px) {
+    .page-heading::after {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        background-image: none;
+    }
+}

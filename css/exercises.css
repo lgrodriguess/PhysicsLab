@@ -1,0 +1,448 @@
+/* Exercícios */
+.exercise-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 20px;
+    align-items: start;
+}
+
+.exercise-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.exercise-type {
+    font-size: 10px;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.exercise-statement {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+.exercise-statement b {
+    color: var(--primary);
+}
+
+.exercise-input {
+    display: block;
+    max-width: 380px;
+}
+
+.exercise-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exercise-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--text);
+    text-align: left;
+    transition: 0.2s;
+}
+
+.exercise-option span {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.exercise-option:not(:disabled):hover {
+    border-color: #93b7f5;
+    background: #f8fbff;
+}
+
+.exercise-option:disabled {
+    cursor: default;
+}
+
+.exercise-option.correct {
+    border-color: var(--green);
+    background: #eafaf2;
+}
+
+.exercise-option.correct span {
+    background: var(--green);
+    color: white;
+}
+
+.exercise-option.wrong {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.exercise-option.wrong span {
+    background: #ef4444;
+    color: white;
+}
+
+.exercise-hint-box {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.exercise-feedback {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.exercise-feedback > strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.exercise-feedback.correct {
+    background: #eafaf2;
+    border: 1px solid #b7ebd0;
+}
+
+.exercise-feedback.correct > strong {
+    color: var(--green);
+}
+
+.exercise-feedback.wrong {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+}
+
+.exercise-feedback.wrong > strong {
+    color: #dc2626;
+}
+
+.exercise-solution {
+    margin: 10px 0 0 18px;
+}
+
+.exercise-solution li {
+    padding: 2px 0;
+}
+
+.exercise-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+}
+
+.exercise-actions-right {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.stat {
+    background: #f8fafc;
+    border: 1px solid #edf1f7;
+    border-radius: 9px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat strong {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: var(--primary);
+}
+
+.stat span {
+    font-size: 9px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.stat-best {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.stat-best strong {
+    color: var(--text);
+}
+
+.topic-stat {
+    margin-bottom: 14px;
+}
+
+.topic-stat-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.topic-stat-head span {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.topic-stat-bar {
+    height: 6px;
+    background: #f1f5f9;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.topic-stat-bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.4s ease;
+}
+
+.topic-stat-bar i.circuits { background: var(--primary); }
+.topic-stat-bar i.magnetism { background: var(--purple); }
+.topic-stat-bar i.induction { background: var(--orange); }
+.topic-stat-bar i.electrostatics { background: var(--green); }
+.topic-stat-bar i.capacitors { background: var(--teal); }
+
+.exercise-stats .reset-button {
+    margin-top: 6px;
+}
+
+.theory-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.theory-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #f8fafc;
+    padding: 0 14px;
+    transition: 0.2s;
+}
+
+.theory-search:focus-within {
+    border-color: var(--primary);
+    background: white;
+}
+
+.theory-search span {
+    color: var(--text-light);
+    font-size: 18px;
+}
+
+.theory-search input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    padding: 13px 0;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+}
+
+.theory-count {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.theory-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.theory-topic {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s;
+}
+
+.theory-topic:hover {
+    border-color: #b9d1fa;
+    box-shadow: 0 10px 25px #1e293b0b;
+}
+
+.theory-topic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.theory-area {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border-radius: 6px;
+}
+
+.theory-area.blue { background: #eff6ff; color: var(--primary); }
+.theory-area.purple { background: #f3efff; color: var(--purple); }
+.theory-area.orange { background: #fff5e9; color: var(--orange); }
+.theory-area.green { background: #eafaf2; color: var(--green); }
+.theory-area.teal { background: #e6f7f8; color: var(--teal); }
+
+.theory-link {
+    background: transparent;
+    color: var(--text-light);
+    font-size: 10px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.theory-link:hover {
+    color: var(--primary);
+}
+
+.theory-topic h4 {
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+}
+
+.theory-topic > p {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 14px;
+}
+
+.theory-formulas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.theory-formula {
+    background: #f8fafc;
+    border: 1px solid #edf1f7;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.theory-formula .formula {
+    display: block;
+    font-size: 15px;
+    margin: 0 0 4px;
+}
+
+.theory-formula small {
+    font-size: 10px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.theory-tip {
+    margin-top: auto;
+    font-size: 10px;
+    line-height: 1.6;
+    color: #92400e;
+    background: #fffbeb;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.theory-empty {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1100px) {
+    .calc-layout,
+    .exercise-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-sidebar {
+        position: static;
+        max-height: none;
+    }
+
+    .calc-formula-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    }
+
+    .calc-area-label {
+        grid-column: 1 / -1;
+    }
+
+    .theory-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .calc-inputs,
+    .calc-output {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exercise-actions-right {
+        width: 100%;
+    }
+
+    .exercise-actions-right button {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+

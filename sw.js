@@ -2,17 +2,28 @@
 // Estratégia: tenta a rede primeiro (pega sempre a versão mais nova) e,
 // se estiver sem internet, usa a cópia salva. A fonte do Google fica em cache.
 // Ao mudar os arquivos do site, aumente CACHE_VERSION.
-const CACHE_VERSION = "physicslab-v8";
+const CACHE_VERSION = "physicslab-v9";
 
 const FILES = [
     "./",
     "./index.html",
-    "./css/style.css",
+    "./css/base.css",
+    "./css/layout.css",
+    "./css/home.css",
+    "./css/responsive.css",
+    "./css/simulators.css",
+    "./css/calculator.css",
+    "./css/theory.css",
+    "./css/exercises.css",
+    "./css/electrostatics.css",
+    "./css/classroom.css",
+    "./css/decorations.css",
     "./js/main.js",
     "./js/navigation.js",
     "./js/utils.js",
     "./js/data/guides.js",
     "./js/data/formulas.js",
+    "./js/data/exercise-bank.js",
     "./js/physics/circuits.js",
     "./js/physics/magnetism.js",
     "./js/physics/induction.js",
