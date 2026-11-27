@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const material = el("cap-material");
     const mode = el("cap-mode");
 
-    const defaults = { area: 100, dist: 2, kappa: 1, voltage: 12, c1: 6, c2: 3, assocV: 18 };
+    const defaults = { area: 0.01, dist: 0.002, kappa: 1, voltage: 12, c1: 0.000006, c2: 0.000003, assocV: 18 };
 
     const NS = "http://www.w3.org/2000/svg";
 
@@ -32,8 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
             v[key] = Number(input.value);
             if (input.value.trim() === "" || !Number.isFinite(v[key])) return null;
         }
-        if (v.area < 1 || v.area > 10000) return null;
-        if (v.dist < 0.1 || v.dist > 20) return null;
+        // Entradas no SI: área em m², distância em m, capacitâncias em F
+        if (v.area < 0.0001 || v.area > 1) return null;
+        if (v.dist < 0.0001 || v.dist > 0.02) return null;
         if (v.kappa < 1 || v.kappa > 100) return null;
         if (v.voltage < 1 || v.voltage > 1000) return null;
         if (v.c1 <= 0 || v.c2 <= 0 || v.assocV <= 0) return null;
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Desenha o capacitor: placas, dielétrico, cargas e campo
     function draw(v, r) {
-        const gap = 22 + v.dist * 6;
+        const gap = 22 + v.dist * 1000 * 6;   // desenho em px: 6 px por mm de distância
         const top = 150 - gap / 2 - 10;
         const bottom = 150 + gap / 2;
 
@@ -68,12 +69,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Setas do campo, mais densas quando E é maior
         const arrows = Math.max(3, Math.min(9, Math.round(3 + Math.log10(Math.max(r.E, 1)) )));
+        // Quanto maior o κ do dielétrico, mais grossas e mais "pesadas" ficam as setas
+        // (κ = 1 mantém o tamanho original; κ = 100 chega a ~3,2x)
+        const scale = 1 + Math.log10(v.kappa) * 1.1;
+        const strokeWidth = 2 * scale;
+        const y1 = top + 11;                            // logo abaixo da placa de cima
+        const y2 = bottom - 1;                          // logo acima da placa de baixo
+        const head = Math.min(9 * scale, (y2 - y1) * 0.8); // altura da ponta (cabe entre as placas)
+        const half = head * 0.6;                        // meia largura da ponta
         let field = "";
         for (let i = 0; i < arrows; i++) {
             const x = 190 + (220 * (i + 0.5)) / arrows;
-            const y1 = top + 14;
-            const y2 = bottom - 8;
-            field += `<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2 - 6}"/><polygon points="${x},${y2} ${x - 5},${y2 - 9} ${x + 5},${y2 - 9}" stroke="none"/>`;
+            field += `<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2 - head + 1}" stroke-width="${strokeWidth}"/><polygon points="${x},${y2} ${x - half},${y2 - head} ${x + half},${y2 - head}" stroke="none"/>`;
         }
         el("cap-field").innerHTML = field;
 
@@ -94,9 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Converte cm² -> m² e mm -> m, e calcula C0 = ε0·A/d e C = κ·C0
-        const A = v.area / 1e4;
-        const d = v.dist / 1000;
+        // Área e distância já estão em m² e m: C0 = ε0·A/d e C = κ·C0
+        const A = v.area;
+        const d = v.dist;
         const C0 = eps0 * A / d;
         const C = v.kappa * C0;
 
@@ -134,8 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Associação de dois capacitores: série e paralelo
-        const c1 = v.c1 * 1e-6;
-        const c2 = v.c2 * 1e-6;
+        const c1 = v.c1;
+        const c2 = v.c2;
         // Série: 1/Ceq = 1/C1 + 1/C2   |   Paralelo: Ceq = C1 + C2
         const cs = c1 * c2 / (c1 + c2);
         const cp = c1 + c2;

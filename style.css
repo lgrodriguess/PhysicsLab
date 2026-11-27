@@ -883,6 +883,13 @@ button {
     font-size: 11px;
 }
 
+.circuit-resistance-value {
+    fill: #dc2626;
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+}
+
 .circuit-positive {
     fill: #16a36a;
     font-size: 14px;
