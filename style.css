@@ -858,7 +858,7 @@ button {
 }
 
 .circuit-resistor {
-    fill: #eff6ff;
+    fill: none;
     stroke: #2563eb;
     stroke-width: 2.5;
     stroke-linejoin: round;
@@ -881,6 +881,13 @@ button {
     fill: #64748b;
     font-family: Inter, sans-serif;
     font-size: 11px;
+}
+
+.circuit-resistance-value {
+    fill: #dc2626;
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .circuit-positive {
@@ -2375,4 +2382,18 @@ button {
 }
 .es-legend-equi {
     border-top: 2px dashed var(--orange);
+}
+
+.magnetism-input select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #1e293b;
+    font-size: 14px;
+    outline: none;
+}
+.magnetism-input select:focus {
+    border-color: var(--primary);
 }

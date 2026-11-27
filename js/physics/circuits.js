@@ -224,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 L ${x + 55} ${y + 10}
                 L ${x + 70} ${y - 10}
                 L ${x + 85} ${y}
-                Z
                 " />
 
             <text class="circuit-text"
@@ -245,7 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 L ${x + 10} ${y + 55}
                 L ${x - 10} ${y + 70}
                 L ${x} ${y + 85}
-                Z
                 " />
 
             <text class="circuit-text"
@@ -293,11 +291,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${resistorHorizontal(170, 65, "R1")}
                 ${resistorHorizontal(335, 65, "R2")}
 
-                <text class="circuit-small-text"
+                <text class="circuit-resistance-value"
                     x="212" y="105"
                     text-anchor="middle">${resistances[0]} Ω</text>
 
-                <text class="circuit-small-text"
+                <text class="circuit-resistance-value"
                     x="377" y="105"
                     text-anchor="middle">${resistances[1]} Ω</text>
 
@@ -311,7 +309,8 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (selectedCircuit === "parallel") {
             drawing = `
                 <path class="circuit-wire"
-                    d="M 100 162 V 65 H 510 V 235 H 100 V 180" />
+                    d="M 100 162 V 65 H 405
+                       M 100 180 V 235 H 405" />
 
                 <path class="circuit-wire"
                     d="M 225 65 V 125
@@ -323,14 +322,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${resistorVertical(225, 125, "R1")}
                 ${resistorVertical(405, 125, "R2")}
 
-                <text class="circuit-small-text"
+                <text class="circuit-resistance-value"
                     x="250" y="191">${resistances[0]} Ω</text>
 
-                <text class="circuit-small-text"
+                <text class="circuit-resistance-value"
                     x="430" y="191">${resistances[1]} Ω</text>
 
                 <text class="circuit-text"
-                    x="310" y="275"
+                    x="255" y="275"
                     text-anchor="middle">Circuito em paralelo</text>
             `;
 
@@ -340,7 +339,8 @@ document.addEventListener("DOMContentLoaded", () => {
             drawing = `
                 <path class="circuit-wire"
                     d="M 100 162 V 65 H 170
-                       M 255 65 H 500 V 235 H 100 V 180" />
+                       M 255 65 H 420
+                       M 100 180 V 235 H 420" />
 
                 <path class="circuit-wire"
                     d="M 290 65 V 125
@@ -354,18 +354,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${resistorVertical(290, 125, "R2")}
                 ${resistorVertical(420, 125, "R3")}
 
-                <text class="circuit-small-text"
+                <text class="circuit-resistance-value"
                     x="210" y="105"
                     text-anchor="middle">${resistances[0]} Ω</text>
 
-                <text class="circuit-small-text"
+                <text class="circuit-resistance-value"
                     x="315" y="191">${resistances[1]} Ω</text>
 
-                <text class="circuit-small-text"
+                <text class="circuit-resistance-value"
                     x="445" y="191">${resistances[2]} Ω</text>
 
                 <text class="circuit-text"
-                    x="310" y="275"
+                    x="260" y="275"
                     text-anchor="middle">Circuito misto</text>
             `;
         }

@@ -20,15 +20,15 @@
 ## ✨ Funcionalidades
 
 ### ± Módulo 04: Eletrostática
-Duas cargas puntiformes sobre o eixo x, com carga e distância ajustáveis.
+Duas cargas puntiformes sobre o eixo x, com carga (C) e distância (m) ajustáveis.
 - Linhas de campo elétrico desenhadas a partir das cargas
 - Ponto P que pode ser **arrastado** na figura ou digitado
-- Campo elétrico resultante em P (módulo, direção e componentes), potencial elétrico e força sobre uma carga de prova de +1 nC
+- Campo elétrico resultante em P (módulo, direção e componentes), potencial elétrico e força sobre uma carga de prova de +1×10⁻⁹ C
 - Curva equipotencial que passa por P
 - Explicação do resultado: superposição vetorial do campo e soma algébrica do potencial
 
 ### ⫴ Módulo 05: Capacitores
-- Capacitor de placas paralelas com área, distância, tensão e dielétrico (materiais pré-definidos ou κ livre)
+- Capacitor de placas paralelas com área (m²), distância (m), tensão e dielétrico (materiais pré-definidos ou κ livre)
 - Bateria **ligada** (tensão constante) ou **desligada** (carga constante) ao inserir o dielétrico
 - Capacitância, carga, tensão, campo elétrico e energia armazenada
 - Associação de dois capacitores em série e em paralelo, com carga e tensão de cada um
@@ -43,14 +43,14 @@ Simulador de circuitos com três resistores e uma fonte DC.
 
 ### ◎ Módulo 02: Magnetismo
 Movimento de uma partícula carregada dentro de um campo magnético.
-- Parâmetros: carga (μC), velocidade (m/s), massa (mg), campo (T) e ângulo entre **v** e **B**
+- Parâmetros: carga (C), velocidade (m/s), massa (kg), campo (T) e ângulo entre **v** e **B**
 - Visualização da trajetória com o campo entrando na tela (⊗)
 - Cálculo da força magnética, do raio da trajetória e da componente perpendicular da velocidade
 - Seção "Entenda o resultado" com a interpretação física
 
 ### ↝ Módulo 03: Indução eletromagnética
 Lei de Faraday-Lenz aplicada a uma espira (ou bobina).
-- Campo inicial e final, área da espira (cm²), número de espiras, intervalo de tempo e ângulos inicial e final
+- Campo inicial e final, área da espira (m²), número de espiras, intervalo de tempo e ângulos inicial e final
 - Visualização da espira dentro do campo
 - Fluxo inicial e final, variação do fluxo e FEM induzida
 

@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
         label: document.getElementById("es-probe-label")
     };
 
-    const defaults = { q1: 5, q2: -5, d: 40, px: 20, py: 15 };
+    // Entradas no SI: cargas em C e distâncias em m (por dentro o módulo usa nC e cm)
+    const defaults = { q1: 5e-9, q2: -5e-9, d: 0.4, px: 0.2, py: 0.15 };
 
     // Posições em cm; S é a escala e (OX, OY) é a origem no desenho
     const S = 4.6;
@@ -53,6 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
             v[key] = Number(el.value);
             if (el.value.trim() === "" || !Number.isFinite(v[key])) return null;
         }
+        // C -> nC e m -> cm (arredonda pra não sobrar ruído de ponto flutuante)
+        const scale = (x, factor) => Number((x * factor).toPrecision(12));
+        v.q1 = scale(v.q1, 1e9);
+        v.q2 = scale(v.q2, 1e9);
+        v.d = scale(v.d, 100);
+        v.px = scale(v.px, 100);
+        v.py = scale(v.py, 100);
         if (Math.abs(v.q1) > 50 || Math.abs(v.q2) > 50) return null;
         if (v.d < 10 || v.d > 80) return null;
         if (v.px < X_MIN || v.px > X_MAX || Math.abs(v.py) > 33) return null;
@@ -146,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return `
                 <circle cx="${x}" cy="${y}" r="13" fill="${fill}" stroke="#fff" stroke-width="2"/>
                 <text x="${x}" y="${y + 5}" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">${sign}</text>
-                <text x="${x}" y="${y + 32}" text-anchor="middle" font-size="12" fill="#475569">q${i + 1} = ${formatNumber(c.q)} nC</text>
+                <text x="${x}" y="${y + 32}" text-anchor="middle" font-size="12" fill="#475569">q${i + 1} = ${formatSI(Number((c.q * 1e-9).toPrecision(12)), "C")}</text>
             `;
         }).join("");
     }
@@ -268,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
         out.potential.textContent = formatSI(f.V, "V");
         // Força numa carga de prova de 1 nC: F = q·E
         out.force.textContent = formatSI(mag * 1e-9, "N");
-        out.dist.textContent = `${formatNumber(r1, 1)} ; ${formatNumber(r2, 1)} cm`;
+        out.dist.textContent = `${formatNumber(r1 / 100, 3)} ; ${formatNumber(r2 / 100, 3)} m`;
         out.explanation.textContent = explain(v, f);
 
         drawFieldLines(charges);
@@ -295,8 +303,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const p = pt.matrixTransform(svg.getScreenCTM().inverse());
         const x = Math.round((p.x - OX) / S);
         const y = Math.round((OY - p.y) / S);
-        inputs.px.value = Math.max(X_MIN, Math.min(X_MAX, x));
-        inputs.py.value = Math.max(-33, Math.min(33, y));
+        // O desenho trabalha em cm, mas o campo de entrada é em m
+        inputs.px.value = Math.max(X_MIN, Math.min(X_MAX, x)) / 100;
+        inputs.py.value = Math.max(-33, Math.min(33, y)) / 100;
         update();
     }
 

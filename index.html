@@ -511,8 +511,8 @@
                 <p class="magnetism-description">Altere os valores para observar os efeitos do campo magnético.</p>
 
                 <div class="magnetism-input">
-                    <label for="mag-charge">Carga elétrica (μC)</label>
-                    <input type="number" id="mag-charge" value="5" min="-10" max="10" step="0.5">
+                    <label for="mag-charge">Carga elétrica (C)</label>
+                    <input type="number" id="mag-charge" value="0.000005" min="-0.00001" max="0.00001" step="5e-7">
                 </div>
 
                 <div class="magnetism-input">
@@ -521,13 +521,21 @@
                 </div>
 
                 <div class="magnetism-input">
-                    <label for="mag-mass">Massa (mg)</label>
-                    <input type="number" id="mag-mass" value="1" min="0.1" max="10" step="0.1">
+                    <label for="mag-mass">Massa (kg)</label>
+                    <input type="number" id="mag-mass" value="0.000001" min="0.0000001" max="0.00001" step="1e-7">
                 </div>
 
                 <div class="magnetism-input">
                     <label for="mag-field">Campo magnético (T)</label>
                     <input type="number" id="mag-field" value="0.5" min="0" max="2" step="0.1">
+                </div>
+
+                <div class="magnetism-input">
+                    <label for="mag-field-dir">Sentido do campo magnético</label>
+                    <select id="mag-field-dir">
+                        <option value="in">⊗ Entrando na tela</option>
+                        <option value="out">⊙ Saindo da tela</option>
+                    </select>
                 </div>
 
                 <div class="magnetism-input">
@@ -549,16 +557,43 @@
                         <rect x="10" y="10" width="580" height="280" rx="12" fill="#f4f7fc"/>
                         <g id="magnetic-field-points"></g>
                         <path id="magnetic-trajectory" d="" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+                        <defs>
+                            <marker id="arrow-v" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a36a"/>
+                            </marker>
+                            <marker id="arrow-f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+                            </marker>
+                        </defs>
+                        <line id="magnetic-v-arrow" x1="0" y1="0" x2="0" y2="0" stroke="#16a36a" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-v)" visibility="hidden"/>
+                        <line id="magnetic-f-arrow" x1="0" y1="0" x2="0" y2="0" stroke="#dc2626" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-f)" visibility="hidden"/>
                         <circle id="magnetic-particle" cx="300" cy="150" r="8" fill="#ef4444"/>
-                        <text x="25" y="35" fill="#475569" font-size="13">Campo magnético: ⊗ entrando na tela</text>
-                        <text id="magnetic-angle-label" x="300" y="270" text-anchor="middle" fill="#475569" font-size="13"></text>
+                        <text id="magnetic-v-label" x="0" y="0" fill="#16a36a" font-size="14" font-weight="700" visibility="hidden">v</text>
+                        <text id="magnetic-f-label" x="0" y="0" fill="#dc2626" font-size="14" font-weight="700" visibility="hidden">F</text>
+                        <text id="magnetic-field-label" x="25" y="35" fill="#475569" font-size="13">Campo magnético: ⊗ entrando na tela</text>
+                        <text id="magnetic-sense-label" x="300" y="258" text-anchor="middle" fill="#334155" font-size="13" font-weight="600"></text>
+                        <text id="magnetic-angle-label" x="300" y="277" text-anchor="middle" fill="#475569" font-size="13"></text>
                     </svg>
                 </div>
 
                 <div class="magnetism-legend">
                     <span><i class="legend-particle"></i> Partícula</span>
                     <span><i class="legend-trajectory"></i> Trajetória</span>
-                    <span>⊗ Campo entrando na tela</span>
+                    <span style="color:#16a36a"><strong>→ v</strong> Velocidade</span>
+                    <span style="color:#dc2626"><strong>→ F</strong> Força magnética</span>
+                    <span id="magnetic-legend-field">⊗ Campo entrando na tela</span>
+                </div>
+            </div>
+
+            <div class="magnetism-card">
+                <h2>Regra da mão direita</h2>
+                <p class="magnetism-description">A mão acompanha a partícula: polegar na velocidade, dedos no campo e a palma empurra no sentido da força (carga positiva).</p>
+
+                <div class="magnetism-visual">
+                    <svg id="mag-hand-svg" viewBox="0 0 600 260" role="img" aria-label="Regra da mão direita aplicada à partícula">
+                        <rect x="10" y="10" width="580" height="240" rx="12" fill="#f4f7fc"/>
+                        <g id="mag-hand-scene"></g>
+                    </svg>
                 </div>
             </div>
 
@@ -585,6 +620,16 @@
                         <span>Movimento</span>
                         <strong id="mag-motion">Repouso</strong>
                     </div>
+
+                    <div class="magnetism-result">
+                        <span>Sentido do campo</span>
+                        <strong id="mag-field-sense">Entrando na tela</strong>
+                    </div>
+
+                    <div class="magnetism-result">
+                        <span>Sentido do giro</span>
+                        <strong id="mag-spin">—</strong>
+                    </div>
                 </div>
 
                 <div class="magnetism-explanation">
@@ -599,6 +644,11 @@
                 <div class="magnetism-formula">
                     <strong>Força magnética</strong>
                     <span>F = |q| · v · B · sen(θ)</span>
+                </div>
+
+                <div class="magnetism-formula">
+                    <strong>Direção e sentido da força</strong>
+                    <span>F⃗ = q · (v⃗ × B⃗) (regra da mão direita; se q &lt; 0, inverte)</span>
                 </div>
 
                 <div class="magnetism-formula">
@@ -640,8 +690,8 @@
                 </div>
 
                 <div class="induction-input">
-                    <label for="induction-area">Área da espira (cm²)</label>
-                    <input type="number" id="induction-area" value="100" min="1" max="10000" step="1">
+                    <label for="induction-area">Área da espira (m²)</label>
+                    <input type="number" id="induction-area" value="0.01" min="0.0001" max="1" step="0.001">
                 </div>
 
                 <div class="induction-input">
@@ -671,33 +721,19 @@
         <div class="induction-results">
             <div class="induction-card">
                 <h3>Visualização da indução</h3>
-                <p class="induction-description">Representação da espira submetida ao campo magnético.</p>
+                <p class="induction-description">À esquerda a espira no início, à direita no fim do intervalo. Quanto mais linhas de campo atravessam a espira, maior o fluxo.</p>
 
                 <div class="induction-visual">
-                    <svg viewBox="0 0 600 300" id="induction-svg" role="img" aria-label="Espira em um campo magnético">
-                        <rect x="10" y="10" width="580" height="280" rx="12" fill="#f4f7fc"/>
-                        <g id="induction-field-lines" stroke="#94a3b8" stroke-width="2" fill="none">
-                            <path d="M 70 80 L 530 80"/>
-                            <path d="M 70 120 L 530 120"/>
-                            <path d="M 70 160 L 530 160"/>
-                            <path d="M 70 200 L 530 200"/>
-                        </g>
-                        <g id="induction-field-arrows" fill="#64748b">
-                            <path d="M 520 74 L 532 80 L 520 86"/>
-                            <path d="M 520 114 L 532 120 L 520 126"/>
-                            <path d="M 520 154 L 532 160 L 520 166"/>
-                            <path d="M 520 194 L 532 200 L 520 206"/>
-                        </g>
-                        <ellipse id="induction-coil" cx="300" cy="150" rx="90" ry="45" fill="none" stroke="#2563eb" stroke-width="5"/>
-                        <ellipse cx="300" cy="150" rx="78" ry="39" fill="none" stroke="#60a5fa" stroke-width="2"/>
-                        <text x="30" y="35" fill="#475569" font-size="13">Campo magnético</text>
-                        <text id="induction-visual-value" x="300" y="260" text-anchor="middle" fill="#475569" font-size="13"></text>
+                    <svg viewBox="0 0 600 330" id="induction-svg" role="img" aria-label="Espira no campo magnético no início e no fim do intervalo">
+                        <g id="induction-scene"></g>
                     </svg>
                 </div>
 
                 <div class="induction-legend">
-                    <span><i class="induction-legend-field"></i> Campo magnético</span>
-                    <span><i class="induction-legend-coil"></i> Espira</span>
+                    <span style="color:#2563eb"><strong>→ B</strong> Campo magnético</span>
+                    <span style="color:#475569"><strong>→ n</strong> Normal da espira</span>
+                    <span style="color:#ea580c"><strong>→ i</strong> Corrente induzida</span>
+                    <span style="color:#9333ea"><strong>→ B<sub>ind</sub></strong> Campo induzido</span>
                 </div>
             </div>
 
@@ -769,28 +805,28 @@
                 <p class="induction-description">Use valores negativos para cargas negativas. As cargas ficam sobre o eixo x, a primeira na origem.</p>
 
                 <div class="induction-input">
-                    <label for="es-q1">Carga q1 (nC)</label>
-                    <input type="number" id="es-q1" value="5" min="-50" max="50" step="1">
+                    <label for="es-q1">Carga q1 (C)</label>
+                    <input type="number" id="es-q1" value="0.000000005" min="-0.00000005" max="0.00000005" step="1e-9">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-q2">Carga q2 (nC)</label>
-                    <input type="number" id="es-q2" value="-5" min="-50" max="50" step="1">
+                    <label for="es-q2">Carga q2 (C)</label>
+                    <input type="number" id="es-q2" value="-0.000000005" min="-0.00000005" max="0.00000005" step="1e-9">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-d">Distância entre q1 e q2 (cm)</label>
-                    <input type="number" id="es-d" value="40" min="10" max="80" step="1">
+                    <label for="es-d">Distância entre q1 e q2 (m)</label>
+                    <input type="number" id="es-d" value="0.4" min="0.1" max="0.8" step="0.01">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-px">Posição x do ponto P (cm)</label>
-                    <input type="number" id="es-px" value="20" min="-20" max="100" step="1">
+                    <label for="es-px">Posição x do ponto P (m)</label>
+                    <input type="number" id="es-px" value="0.2" min="-0.2" max="1" step="0.01">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-py">Posição y do ponto P (cm)</label>
-                    <input type="number" id="es-py" value="15" min="-33" max="33" step="1">
+                    <label for="es-py">Posição y do ponto P (m)</label>
+                    <input type="number" id="es-py" value="0.15" min="-0.33" max="0.33" step="0.01">
                 </div>
 
                 <button id="es-reset" class="induction-reset">Restaurar valores</button>
@@ -844,12 +880,12 @@
                         <strong id="es-potential">0 V</strong>
                     </div>
                     <div class="induction-result">
-                        <span>Força sobre uma carga de prova de +1 nC</span>
+                        <span>Força sobre uma carga de prova de +1×10⁻⁹ C</span>
                         <strong id="es-force">0 N</strong>
                     </div>
                     <div class="induction-result">
                         <span>Distâncias de P a q1 e q2</span>
-                        <strong id="es-dist">0 ; 0 cm</strong>
+                        <strong id="es-dist">0 ; 0 m</strong>
                     </div>
                 </div>
 
@@ -901,13 +937,13 @@
                 <p class="induction-description">Escolha se a bateria fica ligada ao inserir o dielétrico.</p>
 
                 <div class="induction-input">
-                    <label for="cap-area">Área de cada placa (cm²)</label>
-                    <input type="number" id="cap-area" value="100" min="1" max="10000" step="1">
+                    <label for="cap-area">Área de cada placa (m²)</label>
+                    <input type="number" id="cap-area" value="0.01" min="0.0001" max="1" step="0.001">
                 </div>
 
                 <div class="induction-input">
-                    <label for="cap-dist">Distância entre as placas (mm)</label>
-                    <input type="number" id="cap-dist" value="2" min="0.1" max="20" step="0.1">
+                    <label for="cap-dist">Distância entre as placas (m)</label>
+                    <input type="number" id="cap-dist" value="0.002" min="0.0001" max="0.02" step="0.0001">
                 </div>
 
                 <div class="induction-input">
@@ -945,16 +981,16 @@
 
             <div class="induction-card">
                 <h3>Associação de dois capacitores</h3>
-                <p class="induction-description">Valores iniciais do exemplo de aula: 6 µF, 3 µF e 18 V.</p>
+                <p class="induction-description">Valores iniciais do exemplo de aula: 6×10⁻⁶ F, 3×10⁻⁶ F e 18 V.</p>
 
                 <div class="induction-input">
-                    <label for="cap-c1">C1 (µF)</label>
-                    <input type="number" id="cap-c1" value="6" min="0.1" max="1000" step="0.1">
+                    <label for="cap-c1">C1 (F)</label>
+                    <input type="number" id="cap-c1" value="0.000006" min="0.0000001" max="0.001" step="1e-7">
                 </div>
 
                 <div class="induction-input">
-                    <label for="cap-c2">C2 (µF)</label>
-                    <input type="number" id="cap-c2" value="3" min="0.1" max="1000" step="0.1">
+                    <label for="cap-c2">C2 (F)</label>
+                    <input type="number" id="cap-c2" value="0.000003" min="0.0000001" max="0.001" step="1e-7">
                 </div>
 
                 <div class="induction-input">
