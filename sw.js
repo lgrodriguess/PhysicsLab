@@ -2,7 +2,7 @@
 // Estratégia: tenta a rede primeiro (pega sempre a versão mais nova) e,
 // se estiver sem internet, usa a cópia salva. A fonte do Google fica em cache.
 // Ao mudar os arquivos do site, aumente CACHE_VERSION.
-const CACHE_VERSION = "physicslab-v7";
+const CACHE_VERSION = "physicslab-v8";
 
 const FILES = [
     "./",

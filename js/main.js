@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Sistema iniciado com sucesso!");
 
+    // Quem pediu "reduzir movimento" no sistema vê o átomo da página inicial parado
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll("svg.atom").forEach(svg => svg.pauseAnimations && svg.pauseAnimations());
+    }
+
     // Guarda o site no navegador para funcionar sem internet (precisa de http/https)
     const offlineStatus = document.getElementById("offline-status");
 
