@@ -511,8 +511,8 @@
                 <p class="magnetism-description">Altere os valores para observar os efeitos do campo magnético.</p>
 
                 <div class="magnetism-input">
-                    <label for="mag-charge">Carga elétrica (μC)</label>
-                    <input type="number" id="mag-charge" value="5" min="-10" max="10" step="0.5">
+                    <label for="mag-charge">Carga elétrica (C)</label>
+                    <input type="number" id="mag-charge" value="0.000005" min="-0.00001" max="0.00001" step="5e-7">
                 </div>
 
                 <div class="magnetism-input">
@@ -521,8 +521,8 @@
                 </div>
 
                 <div class="magnetism-input">
-                    <label for="mag-mass">Massa (mg)</label>
-                    <input type="number" id="mag-mass" value="1" min="0.1" max="10" step="0.1">
+                    <label for="mag-mass">Massa (kg)</label>
+                    <input type="number" id="mag-mass" value="0.000001" min="0.0000001" max="0.00001" step="1e-7">
                 </div>
 
                 <div class="magnetism-input">
@@ -549,15 +549,30 @@
                         <rect x="10" y="10" width="580" height="280" rx="12" fill="#f4f7fc"/>
                         <g id="magnetic-field-points"></g>
                         <path id="magnetic-trajectory" d="" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+                        <defs>
+                            <marker id="arrow-v" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a36a"/>
+                            </marker>
+                            <marker id="arrow-f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+                            </marker>
+                        </defs>
+                        <line id="magnetic-v-arrow" x1="0" y1="0" x2="0" y2="0" stroke="#16a36a" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-v)" visibility="hidden"/>
+                        <line id="magnetic-f-arrow" x1="0" y1="0" x2="0" y2="0" stroke="#dc2626" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-f)" visibility="hidden"/>
                         <circle id="magnetic-particle" cx="300" cy="150" r="8" fill="#ef4444"/>
+                        <text id="magnetic-v-label" x="0" y="0" fill="#16a36a" font-size="14" font-weight="700" visibility="hidden">v</text>
+                        <text id="magnetic-f-label" x="0" y="0" fill="#dc2626" font-size="14" font-weight="700" visibility="hidden">F</text>
                         <text x="25" y="35" fill="#475569" font-size="13">Campo magnético: ⊗ entrando na tela</text>
-                        <text id="magnetic-angle-label" x="300" y="270" text-anchor="middle" fill="#475569" font-size="13"></text>
+                        <text id="magnetic-sense-label" x="300" y="258" text-anchor="middle" fill="#334155" font-size="13" font-weight="600"></text>
+                        <text id="magnetic-angle-label" x="300" y="277" text-anchor="middle" fill="#475569" font-size="13"></text>
                     </svg>
                 </div>
 
                 <div class="magnetism-legend">
                     <span><i class="legend-particle"></i> Partícula</span>
                     <span><i class="legend-trajectory"></i> Trajetória</span>
+                    <span style="color:#16a36a"><strong>→ v</strong> Velocidade</span>
+                    <span style="color:#dc2626"><strong>→ F</strong> Força magnética</span>
                     <span>⊗ Campo entrando na tela</span>
                 </div>
             </div>
@@ -640,8 +655,8 @@
                 </div>
 
                 <div class="induction-input">
-                    <label for="induction-area">Área da espira (cm²)</label>
-                    <input type="number" id="induction-area" value="100" min="1" max="10000" step="1">
+                    <label for="induction-area">Área da espira (m²)</label>
+                    <input type="number" id="induction-area" value="0.01" min="0.0001" max="1" step="0.001">
                 </div>
 
                 <div class="induction-input">
@@ -769,28 +784,28 @@
                 <p class="induction-description">Use valores negativos para cargas negativas. As cargas ficam sobre o eixo x, a primeira na origem.</p>
 
                 <div class="induction-input">
-                    <label for="es-q1">Carga q1 (nC)</label>
-                    <input type="number" id="es-q1" value="5" min="-50" max="50" step="1">
+                    <label for="es-q1">Carga q1 (C)</label>
+                    <input type="number" id="es-q1" value="0.000000005" min="-0.00000005" max="0.00000005" step="1e-9">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-q2">Carga q2 (nC)</label>
-                    <input type="number" id="es-q2" value="-5" min="-50" max="50" step="1">
+                    <label for="es-q2">Carga q2 (C)</label>
+                    <input type="number" id="es-q2" value="-0.000000005" min="-0.00000005" max="0.00000005" step="1e-9">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-d">Distância entre q1 e q2 (cm)</label>
-                    <input type="number" id="es-d" value="40" min="10" max="80" step="1">
+                    <label for="es-d">Distância entre q1 e q2 (m)</label>
+                    <input type="number" id="es-d" value="0.4" min="0.1" max="0.8" step="0.01">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-px">Posição x do ponto P (cm)</label>
-                    <input type="number" id="es-px" value="20" min="-20" max="100" step="1">
+                    <label for="es-px">Posição x do ponto P (m)</label>
+                    <input type="number" id="es-px" value="0.2" min="-0.2" max="1" step="0.01">
                 </div>
 
                 <div class="induction-input">
-                    <label for="es-py">Posição y do ponto P (cm)</label>
-                    <input type="number" id="es-py" value="15" min="-33" max="33" step="1">
+                    <label for="es-py">Posição y do ponto P (m)</label>
+                    <input type="number" id="es-py" value="0.15" min="-0.33" max="0.33" step="0.01">
                 </div>
 
                 <button id="es-reset" class="induction-reset">Restaurar valores</button>
@@ -844,12 +859,12 @@
                         <strong id="es-potential">0 V</strong>
                     </div>
                     <div class="induction-result">
-                        <span>Força sobre uma carga de prova de +1 nC</span>
+                        <span>Força sobre uma carga de prova de +1×10⁻⁹ C</span>
                         <strong id="es-force">0 N</strong>
                     </div>
                     <div class="induction-result">
                         <span>Distâncias de P a q1 e q2</span>
-                        <strong id="es-dist">0 ; 0 cm</strong>
+                        <strong id="es-dist">0 ; 0 m</strong>
                     </div>
                 </div>
 
@@ -901,13 +916,13 @@
                 <p class="induction-description">Escolha se a bateria fica ligada ao inserir o dielétrico.</p>
 
                 <div class="induction-input">
-                    <label for="cap-area">Área de cada placa (cm²)</label>
-                    <input type="number" id="cap-area" value="100" min="1" max="10000" step="1">
+                    <label for="cap-area">Área de cada placa (m²)</label>
+                    <input type="number" id="cap-area" value="0.01" min="0.0001" max="1" step="0.001">
                 </div>
 
                 <div class="induction-input">
-                    <label for="cap-dist">Distância entre as placas (mm)</label>
-                    <input type="number" id="cap-dist" value="2" min="0.1" max="20" step="0.1">
+                    <label for="cap-dist">Distância entre as placas (m)</label>
+                    <input type="number" id="cap-dist" value="0.002" min="0.0001" max="0.02" step="0.0001">
                 </div>
 
                 <div class="induction-input">
@@ -945,16 +960,16 @@
 
             <div class="induction-card">
                 <h3>Associação de dois capacitores</h3>
-                <p class="induction-description">Valores iniciais do exemplo de aula: 6 µF, 3 µF e 18 V.</p>
+                <p class="induction-description">Valores iniciais do exemplo de aula: 6×10⁻⁶ F, 3×10⁻⁶ F e 18 V.</p>
 
                 <div class="induction-input">
-                    <label for="cap-c1">C1 (µF)</label>
-                    <input type="number" id="cap-c1" value="6" min="0.1" max="1000" step="0.1">
+                    <label for="cap-c1">C1 (F)</label>
+                    <input type="number" id="cap-c1" value="0.000006" min="0.0000001" max="0.001" step="1e-7">
                 </div>
 
                 <div class="induction-input">
-                    <label for="cap-c2">C2 (µF)</label>
-                    <input type="number" id="cap-c2" value="3" min="0.1" max="1000" step="0.1">
+                    <label for="cap-c2">C2 (F)</label>
+                    <input type="number" id="cap-c2" value="0.000003" min="0.0000001" max="0.001" step="1e-7">
                 </div>
 
                 <div class="induction-input">

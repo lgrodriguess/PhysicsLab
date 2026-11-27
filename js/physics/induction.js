@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const defaults = {
         fieldInitial: 0.5,
         fieldFinal: 1,
-        area: 100,
+        area: 0.01,
         turns: 10,
         time: 2,
         angleInitial: 0,
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }) ||
             fieldInitial < 0 || fieldInitial > 5 ||
             fieldFinal < 0 || fieldFinal > 5 ||
-            area < 1 || area > 10000 ||
+            area < 0.0001 || area > 1 ||
             turns < 1 || turns > 1000 ||
             !Number.isInteger(turns) ||
             time <= 0 || time > 1000 ||
@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Converte cm² -> m² e graus -> radianos
-        const areaM2 = area / 10000;
+        // Área já em m²; só converte graus -> radianos
+        const areaM2 = area;
         const initialRadians = angleInitial * Math.PI / 180;
         const finalRadians = angleFinal * Math.PI / 180;
 
@@ -151,4 +151,4 @@ document.addEventListener("DOMContentLoaded", () => {
     resetButton.addEventListener("click", reset);
 
     calculate();
-});
+});
