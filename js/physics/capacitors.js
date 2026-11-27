@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const COLORS = window.PhysicsUtils.colors;
+
     // Módulo de capacitores de placas paralelas
     const svg = document.getElementById("cap-svg");
     if (!svg) return;
@@ -62,8 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let signs = "";
         for (let i = 0; i < count; i++) {
             const x = 190 + (220 * (i + 0.5)) / count;
-            signs += `<text x="${x}" y="${top - 6}" fill="#dc2626">+</text>`;
-            signs += `<text x="${x}" y="${bottom + 26}" fill="#2563eb">−</text>`;
+            signs += `<text x="${x}" y="${top - 6}" fill="${COLORS.red}">+</text>`;
+            signs += `<text x="${x}" y="${bottom + 26}" fill="${COLORS.blue}">−</text>`;
         }
         el("cap-signs").innerHTML = signs;
 
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let wires = `<path d="M 300 ${top} V 36 H 90 V 120"/><path d="M 300 ${bottom + 10} V 264 H 90 V 180"/>`;
         wires += `<line x1="74" y1="120" x2="106" y2="120" stroke-width="4"/><line x1="82" y1="132" x2="98" y2="132" stroke-width="4"/>`;
         wires += `<line x1="82" y1="168" x2="98" y2="168" stroke-width="4"/><line x1="74" y1="180" x2="106" y2="180" stroke-width="4"/>`;
-        el("cap-wires").innerHTML = wires + (connected ? "" : `<line x1="300" y1="36" x2="326" y2="20" stroke="#dc2626"/>`);
+        el("cap-wires").innerHTML = wires + (connected ? "" : `<line x1="300" y1="36" x2="326" y2="20" stroke="${COLORS.red}"/>`);
     }
 
     // Função principal: calcula tudo e atualiza a tela

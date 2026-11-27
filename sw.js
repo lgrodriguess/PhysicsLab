@@ -2,7 +2,7 @@
 // Estratégia: tenta a rede primeiro (pega sempre a versão mais nova) e,
 // se estiver sem internet, usa a cópia salva. A fonte do Google fica em cache.
 // Ao mudar os arquivos do site, aumente CACHE_VERSION.
-const CACHE_VERSION = "physicslab-v5";
+const CACHE_VERSION = "physicslab-v6";
 
 const FILES = [
     "./",
@@ -11,6 +11,7 @@ const FILES = [
     "./js/main.js",
     "./js/navigation.js",
     "./js/utils.js",
+    "./js/data/guides.js",
     "./js/physics/circuits.js",
     "./js/physics/magnetism.js",
     "./js/physics/induction.js",

@@ -12,6 +12,29 @@ window.PhysicsUtils = (() => {
         g: 9.8
     };
 
+    // Cores dos desenhos dos simuladores (um lugar só para mudar o tema)
+    const colors = {
+        red: "#dc2626",        // carga positiva e força (F)
+        blue: "#2563eb",       // campo magnético (B) e carga negativa
+        blueLight: "#60a5fa",  // parte de trás da espira
+        green: "#16a36a",      // velocidade (v)
+        purple: "#9333ea",     // campo induzido
+        orange: "#ea580c",     // corrente induzida
+        amber: "#f59e0b",      // arco de ângulo
+        amberDark: "#b45309",  // texto do ângulo
+        ink: "#1e293b",        // títulos dentro dos desenhos
+        text: "#334155",       // texto dos desenhos
+        textMuted: "#475569",  // texto secundário
+        textSoft: "#64748b",   // marcas ⊗/⊙ e legendas
+        neutral: "#94a3b8",    // carga nula e contornos
+        line: "#cbd5e1",       // linhas de campo de fundo
+        lineLight: "#e2e8f0",  // bordas e planos claros
+        canvas: "#f4f7fc",     // fundo dos desenhos
+        skin: "#f6cfac",       // mão (palma)
+        skinShadow: "#e0ac82", // mão (costas)
+        skinLine: "#a8714a",   // contorno da mão
+    };
+
     // Prefixos do SI usados pra formatar os resultados (k, m, µ, n...)
     const prefixes = [
         { symbol: "G", factor: 1e9 },
@@ -106,6 +129,7 @@ window.PhysicsUtils = (() => {
 
     return {
         constants,
+        colors,
         prefixes,
         formatNumber,
         formatSI,

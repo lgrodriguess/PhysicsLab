@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    const COLORS = window.PhysicsUtils.colors;
     // Campos de entrada e resultados do módulo de magnetismo
     const chargeInput = document.getElementById("mag-charge");
     const velocityInput = document.getElementById("mag-velocity");
@@ -42,28 +44,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // true = campo entrando na tela (⊗), false = saindo (⊙)
     const fieldIsIn = () => fieldDirInput.value !== "out";
 
-    function formatNumber(value) {
-    if (value !== 0 && Math.abs(value) < 0.001) {
-        return value.toExponential(3).replace(".", ",");
-    }
-    return value.toLocaleString("pt-BR", {
-        maximumFractionDigits: 4
-    });
-    }
+    // Formatação de números compartilhada (vírgula decimal e notação científica)
+    const formatNumber = value => window.PhysicsUtils.formatNumber(value, 4);
 
     // Desenha os ⊗ (entrando) ou ⊙ (saindo) do campo magnético
     function drawField() {
         const into = fieldIsIn();
         const mark = into
-            ? `<path d="M -4 -4 L 4 4 M 4 -4 L -4 4" stroke="#64748b" stroke-width="1.5"/>`
-            : `<circle r="2.6" fill="#64748b"/>`;
+            ? `<path d="M -4 -4 L 4 4 M 4 -4 L -4 4" stroke="${COLORS.textSoft}" stroke-width="1.5"/>`
+            : `<circle r="2.6" fill="${COLORS.textSoft}"/>`;
         let points = "";
 
         for (let x = 60; x <= 540; x += 60) {
             for (let y = 75; y <= 225; y += 50) {
                 points += `
                     <g transform="translate(${x}, ${y})">
-                        <circle r="8" fill="none" stroke="#64748b" stroke-width="1.5"/>
+                        <circle r="8" fill="none" stroke="${COLORS.textSoft}" stroke-width="1.5"/>
                         ${mark}
                     </g>
                 `;
@@ -218,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handLegend(lines) {
         return lines.map((l, i) =>
-            `<text x="390" y="${62 + i * 26}" font-size="13" fill="${l.color || "#334155"}" font-weight="${l.bold ? 700 : 500}">${l.text}</text>`
+            `<text x="390" y="${62 + i * 26}" font-size="13" fill="${l.color || COLORS.text}" font-weight="${l.bold ? 700 : 500}">${l.text}</text>`
         ).join("");
     }
 
@@ -230,14 +226,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Plano da tela (um quadrado no plano XY) e o símbolo do campo atravessando
         const screenSquare = [[-2.4, -2.3, 0], [2.4, -2.3, 0], [2.4, 2.3, 0], [-2.4, 2.3, 0]].map(pt).join(" ");
-        let svg = `<polygon points="${screenSquare}" fill="#e2e8f0" fill-opacity="0.55" stroke="#94a3b8" stroke-dasharray="5 4"/>`;
+        let svg = `<polygon points="${screenSquare}" fill="${COLORS.lineLight}" fill-opacity="0.55" stroke="${COLORS.neutral}" stroke-dasharray="5 4"/>`;
         const [tx, ty] = project([2.4, 2.3, 0]);
-        svg += `<text x="${tx - 4}" y="${ty - 6}" text-anchor="end" font-size="11" fill="#64748b">plano da tela</text>`;
+        svg += `<text x="${tx - 4}" y="${ty - 6}" text-anchor="end" font-size="11" fill="${COLORS.textSoft}">plano da tela</text>`;
 
         if (!vScreen || motion.mode === "rest" || motion.mode === "straight" || charge === 0) {
-            svg += arrow3d([0, 0, 0], B, 2.6, "#2563eb", "B");
+            svg += arrow3d([0, 0, 0], B, 2.6, COLORS.blue, "B");
             svg += handLegend([
-                { text: into ? "B ⊗ entra na tela" : "B ⊙ sai da tela", color: "#2563eb", bold: true },
+                { text: into ? "B ⊗ entra na tela" : "B ⊙ sai da tela", color: COLORS.blue, bold: true },
                 { text: "Sem força magnética agora:" },
                 { text: motion.mode === "rest" ? "a partícula está parada." : "F = q·v·B·sen θ = 0." }
             ]);
@@ -253,8 +249,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const P = (s, t) => add(mul(a, s), mul(b, t));
         const facing = dot(n, VIEW) > 0;               // a palma está virada pra gente?
-        const skin = facing ? "#f6cfac" : "#e0ac82";
-        const line = "#a8714a";
+        const skin = facing ? COLORS.skin : COLORS.skinShadow;
+        const line = COLORS.skinLine;
 
         // Palma, dedos e polegar (tudo no plano formado por v e B)
         const palm = [P(-0.5, -0.9), P(0.5, -0.9), P(0.55, 0.35), P(-0.5, 0.35)].map(pt).join(" ");
@@ -274,10 +270,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const wrist = [P(-0.45, -0.9), P(0.45, -0.9), P(0.4, -1.5), P(-0.4, -1.5)].map(pt).join(" ");
         hand = `<polygon points="${wrist}" fill="${skin}" stroke="${line}" stroke-width="2"/>` + hand;
 
-        const vArrow3 = arrow3d(P(1.35, -0.15), a, 0.9, "#16a36a", "v");
-        const bArrow3 = arrow3d(P(0, 1.45), b, 1.0, "#2563eb", "B");
+        const vArrow3 = arrow3d(P(1.35, -0.15), a, 0.9, COLORS.green, "v");
+        const bArrow3 = arrow3d(P(0, 1.45), b, 1.0, COLORS.blue, "B");
         const center = P(0, -0.3);
-        const fArrow3 = arrow3d(center, F, 2.0, "#dc2626", "F");
+        const fArrow3 = arrow3d(center, F, 2.0, COLORS.red, "F");
 
         // A força sai da palma (q > 0) ou das costas da mão (q < 0).
         // Desenha a seta de F atrás ou na frente da mão, conforme o lado pra onde ela aponta.
@@ -285,12 +281,12 @@ document.addEventListener("DOMContentLoaded", () => {
         svg += (fInFront ? hand + fArrow3 : fArrow3 + hand) + vArrow3 + bArrow3;
 
         svg += handLegend([
-            { text: "👍 Polegar → velocidade v", color: "#16a36a", bold: true },
-            { text: `✋ Dedos → campo B (${into ? "⊗ entra" : "⊙ sai"})`, color: "#2563eb", bold: true },
-            { text: charge > 0 ? "🖐 Palma empurra → força F" : "🖐 Costas da mão → força F", color: "#dc2626", bold: true },
+            { text: "👍 Polegar → velocidade v", color: COLORS.green, bold: true },
+            { text: `✋ Dedos → campo B (${into ? "⊗ entra" : "⊙ sai"})`, color: COLORS.blue, bold: true },
+            { text: charge > 0 ? "🖐 Palma empurra → força F" : "🖐 Costas da mão → força F", color: COLORS.red, bold: true },
             { text: charge > 0 ? "Carga positiva: F sai da palma." : "Carga negativa: F é o oposto," },
             { text: charge > 0 ? "" : "sai pelas costas da mão." },
-            { text: facing ? "(vendo a palma da mão)" : "(vendo as costas da mão)", color: "#64748b" }
+            { text: facing ? "(vendo a palma da mão)" : "(vendo as costas da mão)", color: COLORS.textSoft }
         ]);
 
         handScene.innerHTML = svg;

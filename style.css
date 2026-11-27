@@ -1357,48 +1357,48 @@ button {
     }
 }
 
-/* Indução */
-.induction-layout {
+/* Layout compartilhado dos simuladores (indução, eletrostática e capacitores) */
+.sim-layout {
     display: grid;
     grid-template-columns: 320px 1fr;
     gap: 20px;
     align-items: start;
 }
-.induction-controls,
-.induction-results {
+.sim-controls,
+.sim-results {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.induction-card {
+.sim-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 22px;
 }
-.induction-card h3 {
+.sim-card h3 {
     font-size: 18px;
     color: #1e293b;
     margin: 0 0 10px;
 }
-.induction-description {
+.sim-description {
     color: #64748b;
     font-size: 13px;
     line-height: 1.5;
     margin: 0 0 22px;
 }
-.induction-input {
+.sim-input {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin-bottom: 16px;
 }
-.induction-input label {
+.sim-input label {
     color: #475569;
     font-size: 13px;
     font-weight: 600;
 }
-.induction-input input {
+.sim-input input {
     width: 100%;
     padding: 11px 12px;
     border: 1px solid var(--border);
@@ -1408,10 +1408,10 @@ button {
     font-size: 14px;
     outline: none;
 }
-.induction-input input:focus {
+.sim-input input:focus {
     border-color: var(--primary);
 }
-.induction-reset {
+.sim-reset {
     width: 100%;
     padding: 12px;
     border: none;
@@ -1421,20 +1421,20 @@ button {
     font-weight: 600;
     cursor: pointer;
 }
-.induction-reset:hover {
+.sim-reset:hover {
     background: #1d4ed8;
 }
-.induction-visual {
+.sim-visual {
     width: 100%;
     overflow: hidden;
     border-radius: 10px;
 }
-.induction-visual svg {
+.sim-visual svg {
     display: block;
     width: 100%;
     height: auto;
 }
-.induction-legend {
+.sim-legend {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -1442,27 +1442,27 @@ button {
     color: #64748b;
     font-size: 12px;
 }
-.induction-legend span {
+.sim-legend span {
     display: flex;
     align-items: center;
     gap: 7px;
 }
-.induction-legend-field,
-.induction-legend-coil {
+.sim-legend-field,
+.sim-legend-coil {
     width: 18px;
     height: 3px;
     border-radius: 2px;
     background: #94a3b8;
 }
-.induction-legend-coil {
+.sim-legend-coil {
     background: #2563eb;
 }
-.induction-result-grid {
+.sim-result-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
-.induction-result {
+.sim-result {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1471,64 +1471,64 @@ button {
     border: 1px solid var(--border);
     border-radius: 10px;
 }
-.induction-result span {
+.sim-result span {
     color: #64748b;
     font-size: 12px;
 }
-.induction-result strong {
+.sim-result strong {
     color: #2563eb;
     font-size: 18px;
     overflow-wrap: anywhere;
 }
-.induction-explanation {
+.sim-explanation {
     margin-top: 20px;
     padding: 16px;
     background: #eff6ff;
     border-radius: 10px;
 }
-.induction-explanation h4 {
+.sim-explanation h4 {
     color: #1e40af;
     font-size: 14px;
     margin: 0 0 8px;
 }
-.induction-explanation p {
+.sim-explanation p {
     color: #334155;
     font-size: 13px;
     line-height: 1.7;
     margin: 0;
 }
-.induction-formula {
+.sim-formula {
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 14px 0;
     border-bottom: 1px solid var(--border);
 }
-.induction-formula:last-child {
+.sim-formula:last-child {
     border-bottom: none;
 }
-.induction-formula strong {
+.sim-formula strong {
     color: #475569;
     font-size: 13px;
 }
-.induction-formula span {
+.sim-formula span {
     color: #2563eb;
     font-size: 16px;
     font-weight: 600;
 }
 @media (max-width: 900px) {
-    .induction-layout {
+    .sim-layout {
         grid-template-columns: 1fr;
     }
 }
 @media (max-width: 500px) {
-    .induction-card {
+    .sim-card {
         padding: 16px;
     }
-    .induction-result-grid {
+    .sim-result-grid {
         grid-template-columns: 1fr;
     }
-    .induction-legend {
+    .sim-legend {
         flex-direction: column;
         gap: 8px;
     }
@@ -2356,7 +2356,7 @@ button {
 
 
 /* Eletrostática e capacitores */
-.induction-input select {
+.sim-input select {
     width: 100%;
     padding: 11px 12px;
     border: 1px solid var(--border);
@@ -2366,7 +2366,7 @@ button {
     font-size: 14px;
     outline: none;
 }
-.induction-input select:focus {
+.sim-input select:focus {
     border-color: var(--primary);
 }
 .es-legend-vector,

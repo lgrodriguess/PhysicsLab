@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    const COLORS = window.PhysicsUtils.colors;
     // Campos de entrada e resultados do módulo de indução
     const fieldInitialInput = document.getElementById("induction-field-initial");
     const fieldFinalInput = document.getElementById("induction-field-final");
@@ -27,15 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
         angleFinal: 60
     };
 
-    function formatNumber(value) {
-        if (value !== 0 && Math.abs(value) < 0.001) {
-            return value.toExponential(3).replace(".", ",");
-        }
-
-        return value.toLocaleString("pt-BR", {
-            maximumFractionDigits: 6
-        });
-    }
+    // Formatação de números compartilhada (vírgula decimal e notação científica)
+    const formatNumber = value => window.PhysicsUtils.formatNumber(value, 6);
 
     // Calcula o fluxo e a FEM induzida
     function calculate() {
@@ -123,10 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ---------------- Desenho ----------------
-    const BLUE = "#2563eb";
-    const ORANGE = "#ea580c";
-    const PURPLE = "#9333ea";
-    const GRAY = "#475569";
+    const BLUE = COLORS.blue;
+    const ORANGE = COLORS.orange;
+    const PURPLE = COLORS.purple;
+    const GRAY = COLORS.textMuted;
 
     const f1 = n => n.toFixed(1);
 
@@ -179,13 +174,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return d;
         };
 
-        let svg = `<rect x="${x0}" y="42" width="${W}" height="232" rx="10" fill="#f4f7fc" stroke="#e2e8f0"/>`;
-        svg += `<text x="${cx}" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">${title}</text>`;
+        let svg = `<rect x="${x0}" y="42" width="${W}" height="232" rx="10" fill="${COLORS.canvas}" stroke="${COLORS.lineLight}"/>`;
+        svg += `<text x="${cx}" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="${COLORS.ink}">${title}</text>`;
 
         // Parte de trás da espira (tracejada) e o "disco" da área
         const disk = arc(0, 2 * Math.PI) + "Z";
         svg += `<path d="${disk}" fill="${BLUE}" fill-opacity="0.07"/>`;
-        svg += `<path d="${arc(Math.PI, 2 * Math.PI)}" fill="none" stroke="#60a5fa" stroke-width="3" stroke-dasharray="5 4"/>`;
+        svg += `<path d="${arc(Math.PI, 2 * Math.PI)}" fill="none" stroke="${COLORS.blueLight}" stroke-width="3" stroke-dasharray="5 4"/>`;
 
         // Linhas de campo: mais grossas quanto maior o B
         const strength = Bmax > 0 ? B / Bmax : 0;
@@ -198,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             for (const y of rows) {
-                svg += `<line x1="${x0 + 14}" y1="${y}" x2="${x0 + W - 14}" y2="${y}" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 5"/>`;
+                svg += `<line x1="${x0 + 14}" y1="${y}" x2="${x0 + W - 14}" y2="${y}" stroke="${COLORS.line}" stroke-width="1" stroke-dasharray="3 5"/>`;
             }
         }
 
@@ -211,9 +206,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (theta > 0) {
             const r = 26;
             const large = theta > 180 ? 1 : 0;
-            svg += `<path d="M ${cx + r} ${cy} A ${r} ${r} 0 ${large} 0 ${f1(cx + r * n[0])} ${f1(cy + r * n[1])}" fill="none" stroke="#f59e0b" stroke-width="2"/>`;
+            svg += `<path d="M ${cx + r} ${cy} A ${r} ${r} 0 ${large} 0 ${f1(cx + r * n[0])} ${f1(cy + r * n[1])}" fill="none" stroke="${COLORS.amber}" stroke-width="2"/>`;
             const mid = t / 2;
-            svg += `<text x="${f1(cx + 40 * Math.cos(mid))}" y="${f1(cy - 40 * Math.sin(mid) + 4)}" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">${theta}°</text>`;
+            svg += `<text x="${f1(cx + 40 * Math.cos(mid))}" y="${f1(cy - 40 * Math.sin(mid) + 4)}" text-anchor="middle" font-size="12" font-weight="700" fill="${COLORS.amberDark}">${theta}°</text>`;
         }
 
         // Corrente induzida e campo induzido (só no painel final)
@@ -235,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Rótulos de baixo
         svg += `<text x="${x0 + 14}" y="84" font-size="12" font-weight="700" fill="${BLUE}">B = ${formatNumber(B)} T →</text>`;
-        svg += `<text x="${cx}" y="264" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Φ = ${formatNumber(flux)} Wb</text>`;
+        svg += `<text x="${cx}" y="264" text-anchor="middle" font-size="13" font-weight="700" fill="${COLORS.ink}">Φ = ${formatNumber(flux)} Wb</text>`;
         return svg;
     }
 
@@ -267,10 +262,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? "ΔΦ > 0 → B induzido contra n (Lenz)"
                 : "ΔΦ < 0 → B induzido a favor de n (Lenz)";
         }
-        svg += `<text x="300" y="296" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">${summary}</text>`;
+        svg += `<text x="300" y="296" text-anchor="middle" font-size="13" font-weight="700" fill="${COLORS.ink}">${summary}</text>`;
         if (sigma !== 0) {
             svg += rightHandIcon(40, 314);
-            svg += `<text x="66" y="320" font-size="12" fill="#334155">Mão direita: polegar no <tspan fill="${PURPLE}" font-weight="700">B induzido</tspan>, os dedos dobrados dão o sentido da <tspan fill="${ORANGE}" font-weight="700">corrente i</tspan></text>`;
+            svg += `<text x="66" y="320" font-size="12" fill="${COLORS.text}">Mão direita: polegar no <tspan fill="${PURPLE}" font-weight="700">B induzido</tspan>, os dedos dobrados dão o sentido da <tspan fill="${ORANGE}" font-weight="700">corrente i</tspan></text>`;
         }
 
         scene.innerHTML = svg;
@@ -305,4 +300,4 @@ document.addEventListener("DOMContentLoaded", () => {
     resetButton.addEventListener("click", reset);
 
     calculate();
-});
+});

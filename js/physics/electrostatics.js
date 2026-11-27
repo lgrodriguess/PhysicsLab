@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const COLORS = window.PhysicsUtils.colors;
+
     // Módulo de eletrostática: duas cargas no eixo x e um ponto P
     const svg = document.getElementById("es-svg");
     if (!svg) return;
@@ -149,12 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function drawCharges(charges) {
         g.charges.innerHTML = charges.map((c, i) => {
             const [x, y] = toPx(c.x, c.y);
-            const fill = c.q > 0 ? "#dc2626" : c.q < 0 ? "#2563eb" : "#94a3b8";
+            const fill = c.q > 0 ? COLORS.red : c.q < 0 ? COLORS.blue : COLORS.neutral;
             const sign = c.q > 0 ? "+" : c.q < 0 ? "−" : "0";
             return `
                 <circle cx="${x}" cy="${y}" r="13" fill="${fill}" stroke="#fff" stroke-width="2"/>
                 <text x="${x}" y="${y + 5}" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">${sign}</text>
-                <text x="${x}" y="${y + 32}" text-anchor="middle" font-size="12" fill="#475569">q${i + 1} = ${formatSI(Number((c.q * 1e-9).toPrecision(12)), "C")}</text>
+                <text x="${x}" y="${y + 32}" text-anchor="middle" font-size="12" fill="${COLORS.textMuted}">q${i + 1} = ${formatSI(Number((c.q * 1e-9).toPrecision(12)), "C")}</text>
             `;
         }).join("");
     }

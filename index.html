@@ -9,14 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Scripts: navegação, simuladores e funcionalidades -->
+    <!-- Scripts (ordem importa: utilitários e dados primeiro, depois quem usa) -->
+    <script src="js/utils.js" defer></script>
+    <script src="js/data/guides.js" defer></script>
     <script src="js/navigation.js" defer></script>
     <script src="js/physics/circuits.js" defer></script>
     <script src="js/physics/magnetism.js" defer></script>
     <script src="js/physics/induction.js" defer></script>
     <script src="js/physics/electrostatics.js" defer></script>
     <script src="js/physics/capacitors.js" defer></script>
-    <script src="js/utils.js" defer></script>
     <script src="js/features/theory.js" defer></script>
     <script src="js/features/calculator.js" defer></script>
     <script src="js/features/exercises.js" defer></script>
@@ -698,63 +699,63 @@
         <p>Explore como a variação do fluxo magnético pode gerar uma força eletromotriz induzida.</p>
     </div>
 
-    <div class="induction-layout">
-        <div class="induction-controls">
-            <div class="induction-card">
+    <div class="sim-layout">
+        <div class="sim-controls">
+            <div class="sim-card">
                 <h3>Parâmetros da simulação</h3>
-                <p class="induction-description">Altere os valores para observar a indução eletromagnética.</p>
+                <p class="sim-description">Altere os valores para observar a indução eletromagnética.</p>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="induction-field-initial">Campo magnético inicial (T)</label>
                     <input type="number" id="induction-field-initial" value="0.5" min="0" max="5" step="0.1">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="induction-field-final">Campo magnético final (T)</label>
                     <input type="number" id="induction-field-final" value="1" min="0" max="5" step="0.1">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="induction-area">Área da espira (m²)</label>
                     <input type="number" id="induction-area" value="0.01" min="0.0001" max="1" step="0.001">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="induction-turns">Número de espiras</label>
                     <input type="number" id="induction-turns" value="10" min="1" max="1000" step="1">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="induction-time">Intervalo de tempo (s)</label>
                     <input type="number" id="induction-time" value="2" min="0.01" max="1000" step="0.1">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="induction-angle-initial">Ângulo inicial entre B e a normal da espira (°)</label>
                     <input type="number" id="induction-angle-initial" value="0" min="0" max="180" step="1">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="induction-angle-final">Ângulo final entre B e a normal da espira (°)</label>
                     <input type="number" id="induction-angle-final" value="60" min="0" max="180" step="1">
                 </div>
 
-                <button id="induction-reset" class="induction-reset">Restaurar valores</button>
+                <button id="induction-reset" class="sim-reset">Restaurar valores</button>
             </div>
         </div>
 
-        <div class="induction-results">
-            <div class="induction-card">
+        <div class="sim-results">
+            <div class="sim-card">
                 <h3>Visualização da indução</h3>
-                <p class="induction-description">À esquerda a espira no início, à direita no fim do intervalo. Quanto mais linhas de campo atravessam a espira, maior o fluxo.</p>
+                <p class="sim-description">À esquerda a espira no início, à direita no fim do intervalo. Quanto mais linhas de campo atravessam a espira, maior o fluxo.</p>
 
-                <div class="induction-visual">
+                <div class="sim-visual">
                     <svg viewBox="0 0 600 330" id="induction-svg" role="img" aria-label="Espira no campo magnético no início e no fim do intervalo">
                         <g id="induction-scene"></g>
                     </svg>
                 </div>
 
-                <div class="induction-legend">
+                <div class="sim-legend">
                     <span style="color:#2563eb"><strong>→ B</strong> Campo magnético</span>
                     <span style="color:#475569"><strong>→ n</strong> Normal da espira</span>
                     <span style="color:#ea580c"><strong>→ i</strong> Corrente induzida</span>
@@ -762,51 +763,51 @@
                 </div>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Resultados dos cálculos</h3>
 
-                <div class="induction-result-grid">
-                    <div class="induction-result">
+                <div class="sim-result-grid">
+                    <div class="sim-result">
                         <span>Fluxo inicial</span>
                         <strong id="induction-flux-initial">0 Wb</strong>
                     </div>
 
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Fluxo final</span>
                         <strong id="induction-flux-final">0 Wb</strong>
                     </div>
 
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Variação do fluxo</span>
                         <strong id="induction-flux-change">0 Wb</strong>
                     </div>
 
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Força eletromotriz induzida</span>
                         <strong id="induction-emf">0 V</strong>
                     </div>
                 </div>
 
-                <div class="induction-explanation">
+                <div class="sim-explanation">
                     <h4>Entenda o resultado</h4>
                     <p id="induction-explanation"></p>
                 </div>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Fórmulas utilizadas</h3>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Fluxo magnético</strong>
                     <span>Φ = B · A · cos(θ)</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Variação do fluxo</strong>
                     <span>ΔΦ = Φfinal − Φinicial</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Lei de Faraday-Lenz</strong>
                     <span>ε = −N · ΔΦ / Δt</span>
                 </div>
@@ -823,47 +824,47 @@
         <p>Coloque duas cargas puntiformes, escolha um ponto P e veja o campo elétrico, o potencial e a força. Você também pode arrastar o ponto P direto na figura.</p>
     </div>
 
-    <div class="induction-layout">
-        <div class="induction-controls">
-            <div class="induction-card">
+    <div class="sim-layout">
+        <div class="sim-controls">
+            <div class="sim-card">
                 <h3>Parâmetros da simulação</h3>
-                <p class="induction-description">Use valores negativos para cargas negativas. As cargas ficam sobre o eixo x, a primeira na origem.</p>
+                <p class="sim-description">Use valores negativos para cargas negativas. As cargas ficam sobre o eixo x, a primeira na origem.</p>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="es-q1">Carga q1 (C)</label>
                     <input type="number" id="es-q1" value="0.000000005" min="-0.00000005" max="0.00000005" step="1e-9">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="es-q2">Carga q2 (C)</label>
                     <input type="number" id="es-q2" value="-0.000000005" min="-0.00000005" max="0.00000005" step="1e-9">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="es-d">Distância entre q1 e q2 (m)</label>
                     <input type="number" id="es-d" value="0.4" min="0.1" max="0.8" step="0.01">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="es-px">Posição x do ponto P (m)</label>
                     <input type="number" id="es-px" value="0.2" min="-0.2" max="1" step="0.01">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="es-py">Posição y do ponto P (m)</label>
                     <input type="number" id="es-py" value="0.15" min="-0.33" max="0.33" step="0.01">
                 </div>
 
-                <button id="es-reset" class="induction-reset">Restaurar valores</button>
+                <button id="es-reset" class="sim-reset">Restaurar valores</button>
             </div>
         </div>
 
-        <div class="induction-results">
-            <div class="induction-card">
+        <div class="sim-results">
+            <div class="sim-card">
                 <h3>Campo e superfície equipotencial</h3>
-                <p class="induction-description">Linhas de campo saem das cargas positivas e chegam às negativas. A curva tracejada passa por P e tem o mesmo potencial em todos os pontos.</p>
+                <p class="sim-description">Linhas de campo saem das cargas positivas e chegam às negativas. A curva tracejada passa por P e tem o mesmo potencial em todos os pontos.</p>
 
-                <div class="induction-visual">
+                <div class="sim-visual">
                     <svg viewBox="0 0 600 320" id="es-svg" role="img" aria-label="Linhas de campo elétrico de duas cargas puntiformes" style="touch-action:none">
                         <rect x="4" y="4" width="592" height="312" rx="12" fill="#f4f7fc"/>
                         <path id="es-equipotential" fill="none" stroke="#e58a32" stroke-width="2" stroke-dasharray="6 5"/>
@@ -877,68 +878,68 @@
                     </svg>
                 </div>
 
-                <div class="induction-legend">
-                    <span><i class="induction-legend-field"></i> Linhas de campo</span>
+                <div class="sim-legend">
+                    <span><i class="sim-legend-field"></i> Linhas de campo</span>
                     <span><i class="es-legend-vector"></i> Campo resultante em P</span>
                     <span><i class="es-legend-equi"></i> Equipotencial de P</span>
                 </div>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Resultados em P</h3>
 
-                <div class="induction-result-grid">
-                    <div class="induction-result">
+                <div class="sim-result-grid">
+                    <div class="sim-result">
                         <span>Campo elétrico (módulo)</span>
                         <strong id="es-e-mag">0 N/C</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Direção do campo (em relação ao eixo x)</span>
                         <strong id="es-e-angle">0°</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Componentes Ex e Ey</span>
                         <strong id="es-e-comp">0 ; 0 N/C</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Potencial elétrico</span>
                         <strong id="es-potential">0 V</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Força sobre uma carga de prova de +1×10⁻⁹ C</span>
                         <strong id="es-force">0 N</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Distâncias de P a q1 e q2</span>
                         <strong id="es-dist">0 ; 0 m</strong>
                     </div>
                 </div>
 
-                <div class="induction-explanation">
+                <div class="sim-explanation">
                     <h4>Entenda o resultado</h4>
                     <p id="es-explanation"></p>
                 </div>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Fórmulas utilizadas</h3>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Campo de cada carga</strong>
                     <span>E = k · |q| / r²</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Superposição (soma vetorial)</strong>
                     <span>E = E1 + E2 (em componentes x e y)</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Potencial (soma algébrica)</strong>
                     <span>V = k · q1 / r1 + k · q2 / r2</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Força sobre a carga de prova</strong>
                     <span>F = q0 · E</span>
                 </div>
@@ -955,23 +956,23 @@
         <p>Veja como área, distância, tensão e dielétrico mudam a capacitância, a carga e a energia armazenada. Depois, compare as associações em série e em paralelo.</p>
     </div>
 
-    <div class="induction-layout">
-        <div class="induction-controls">
-            <div class="induction-card">
+    <div class="sim-layout">
+        <div class="sim-controls">
+            <div class="sim-card">
                 <h3>Capacitor de placas paralelas</h3>
-                <p class="induction-description">Escolha se a bateria fica ligada ao inserir o dielétrico.</p>
+                <p class="sim-description">Escolha se a bateria fica ligada ao inserir o dielétrico.</p>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-area">Área de cada placa (m²)</label>
                     <input type="number" id="cap-area" value="0.01" min="0.0001" max="1" step="0.001">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-dist">Distância entre as placas (m)</label>
                     <input type="number" id="cap-dist" value="0.002" min="0.0001" max="0.02" step="0.0001">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-material">Dielétrico</label>
                     <select id="cap-material">
                         <option value="1">Vácuo ou ar (κ = 1)</option>
@@ -983,17 +984,17 @@
                     </select>
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-kappa">Constante dielétrica κ</label>
                     <input type="number" id="cap-kappa" value="1" min="1" max="100" step="0.1">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-voltage">Tensão da bateria (V)</label>
                     <input type="number" id="cap-voltage" value="12" min="1" max="1000" step="1">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-mode">Bateria</label>
                     <select id="cap-mode">
                         <option value="connected">Ligada (tensão constante)</option>
@@ -1001,36 +1002,36 @@
                     </select>
                 </div>
 
-                <button id="cap-reset" class="induction-reset">Restaurar valores</button>
+                <button id="cap-reset" class="sim-reset">Restaurar valores</button>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Associação de dois capacitores</h3>
-                <p class="induction-description">Valores iniciais do exemplo de aula: 6×10⁻⁶ F, 3×10⁻⁶ F e 18 V.</p>
+                <p class="sim-description">Valores iniciais do exemplo de aula: 6×10⁻⁶ F, 3×10⁻⁶ F e 18 V.</p>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-c1">C1 (F)</label>
                     <input type="number" id="cap-c1" value="0.000006" min="0.0000001" max="0.001" step="1e-7">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-c2">C2 (F)</label>
                     <input type="number" id="cap-c2" value="0.000003" min="0.0000001" max="0.001" step="1e-7">
                 </div>
 
-                <div class="induction-input">
+                <div class="sim-input">
                     <label for="cap-assoc-v">Tensão aplicada (V)</label>
                     <input type="number" id="cap-assoc-v" value="18" min="1" max="1000" step="1">
                 </div>
             </div>
         </div>
 
-        <div class="induction-results">
-            <div class="induction-card">
+        <div class="sim-results">
+            <div class="sim-card">
                 <h3>Visualização</h3>
-                <p class="induction-description">Mais sinais nas placas significa mais carga. As setas mostram o campo entre as placas.</p>
+                <p class="sim-description">Mais sinais nas placas significa mais carga. As setas mostram o campo entre as placas.</p>
 
-                <div class="induction-visual">
+                <div class="sim-visual">
                     <svg viewBox="0 0 600 300" id="cap-svg" role="img" aria-label="Capacitor de placas paralelas">
                         <rect x="4" y="4" width="592" height="292" rx="12" fill="#f4f7fc"/>
                         <g id="cap-wires" stroke="#475569" stroke-width="2.5" fill="none"></g>
@@ -1044,89 +1045,89 @@
                 </div>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Resultados do capacitor</h3>
 
-                <div class="induction-result-grid">
-                    <div class="induction-result">
+                <div class="sim-result-grid">
+                    <div class="sim-result">
                         <span>Capacitância sem dielétrico (C0)</span>
                         <strong id="cap-c0">0 F</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Capacitância com dielétrico (C)</span>
                         <strong id="cap-c">0 F</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Carga em cada placa</span>
                         <strong id="cap-q">0 C</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Tensão entre as placas</span>
                         <strong id="cap-v">0 V</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Campo elétrico entre as placas</span>
                         <strong id="cap-e">0 V/m</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Energia armazenada</span>
                         <strong id="cap-u">0 J</strong>
                     </div>
                 </div>
 
-                <div class="induction-explanation">
+                <div class="sim-explanation">
                     <h4>Entenda o resultado</h4>
                     <p id="cap-explanation"></p>
                 </div>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Resultados da associação</h3>
 
-                <div class="induction-result-grid">
-                    <div class="induction-result">
+                <div class="sim-result-grid">
+                    <div class="sim-result">
                         <span>Série: capacitância equivalente</span>
                         <strong id="cap-series-ceq">0 F</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Paralelo: capacitância equivalente</span>
                         <strong id="cap-parallel-ceq">0 F</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Série: carga (igual nos dois) e tensões V1 ; V2</span>
                         <strong id="cap-series-detail">—</strong>
                     </div>
-                    <div class="induction-result">
+                    <div class="sim-result">
                         <span>Paralelo: tensão (igual nos dois) e cargas Q1 ; Q2</span>
                         <strong id="cap-parallel-detail">—</strong>
                     </div>
                 </div>
             </div>
 
-            <div class="induction-card">
+            <div class="sim-card">
                 <h3>Fórmulas utilizadas</h3>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Placas paralelas com dielétrico</strong>
                     <span>C = κ · ε0 · A / d</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Carga</strong>
                     <span>Q = C · V</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Energia armazenada</strong>
                     <span>U = ½ · C · V²</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Série</strong>
                     <span>1/Ceq = 1/C1 + 1/C2</span>
                 </div>
 
-                <div class="induction-formula">
+                <div class="sim-formula">
                     <strong>Paralelo</strong>
                     <span>Ceq = C1 + C2</span>
                 </div>

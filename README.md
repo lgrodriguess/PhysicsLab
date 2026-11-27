@@ -126,7 +126,9 @@ PhysicsLab/
 └── js/
     ├── main.js             # Inicialização
     ├── navigation.js       # Navegação entre páginas (SPA com hash)
-    ├── utils.js            # Constantes físicas e funções compartilhadas
+    ├── utils.js            # Constantes, paleta de cores e funções compartilhadas
+    ├── data/
+    │   └── guides.js       # Textos dos guias de estudo e cenários prontos
     ├── physics/
     │   ├── electrostatics.js # Cargas, campo e potencial
     │   ├── capacitors.js   # Capacitores e dielétricos
@@ -148,11 +150,15 @@ PhysicsLab/
 - **Navegação declarativa:** qualquer elemento com `data-page` (menu) ou `data-go` (botões e cards) leva à página indicada, inclusive elementos criados dinamicamente (delegação de eventos).
 - **`PhysicsUtils`** (`utils.js`): módulo global com:
   - constantes físicas (`μ₀`, `k`, `e`)
+  - paleta de cores dos desenhos (`colors`), usada por todos os simuladores
   - formatação numérica no padrão pt-BR e com prefixos do SI
   - `parseNumber`, que aceita vírgula decimal
   - helpers de aleatoriedade (`randomInt`, `pick`, `shuffle`)
   - wrapper seguro para `localStorage`
   - `escapeHTML`
+- **Classes compartilhadas:** os simuladores de indução, eletrostática e capacitores usam o mesmo layout (`sim-layout`, `sim-card`, `sim-input`, `sim-result`…).
+- **Conteúdo separado da lógica:** os textos dos guias ficam em `js/data/guides.js` e o `classroom.js` só monta a interface.
+- **Padrão de arquivos:** `.editorconfig` e `.gitattributes` mantêm UTF-8, quebra de linha LF e indentação de 4 espaços.
 - **Persistência:** o histórico da calculadora (`physicslab.calc.history`) e as estatísticas dos exercícios (`physicslab.exercises.stats`) ficam salvos no `localStorage`.
 
 ---
