@@ -19,6 +19,15 @@
 
 ## ✨ Funcionalidades
 
+### 🏫 Recursos de sala de aula e estudo
+Pensados para o professor usar em sala e para o aluno estudar sozinho.
+- **Cenários prontos:** cada simulador tem situações montadas com um clique (ex.: "Carga negativa", "Vidro com bateria desligada"), cada uma com um texto "O que observar"
+- **Guia de estudo:** objetivos, roteiro passo a passo (Prever → Observar → Explicar), perguntas com resposta escondida, erros comuns e dicas para o professor
+- **Modo projetor:** menu só com ícones, textos e figuras maiores e mais contraste (fica salvo no navegador)
+- **Tela cheia** com um clique
+- **Pausar e câmera lenta** (0,25×, 0,5×, 1×) na animação do magnetismo; a barra de espaço pausa e continua
+- **Funciona offline:** depois do primeiro acesso (por http/https), o site fica salvo no navegador
+
 ### ± Módulo 04: Eletrostática
 Duas cargas puntiformes sobre o eixo x, com carga (C) e distância (m) ajustáveis.
 - Linhas de campo elétrico desenhadas a partir das cargas
@@ -100,7 +109,9 @@ npx serve .
 
 Depois acesse `http://localhost:8000`.
 
-> A fonte **Inter** é carregada do Google Fonts, então sem internet o site usa uma fonte alternativa do sistema.
+> A fonte **Inter** é carregada do Google Fonts e fica salva para uso offline depois do primeiro acesso.
+>
+> O modo offline só funciona pelo servidor (opção 2) ou publicado na web. Abrindo o arquivo direto, todo o resto funciona normalmente. Ao alterar arquivos do site, aumente `CACHE_VERSION` no `sw.js`.
 
 ---
 
@@ -110,6 +121,8 @@ Depois acesse `http://localhost:8000`.
 PhysicsLab/
 ├── index.html              # Página única com todas as seções
 ├── style.css               # Estilos globais e de cada módulo
+├── sw.js                   # Service worker (modo offline)
+├── ROADMAP.md              # Planejamento da iniciação científica
 └── js/
     ├── main.js             # Inicialização
     ├── navigation.js       # Navegação entre páginas (SPA com hash)
@@ -123,7 +136,8 @@ PhysicsLab/
     └── features/
         ├── calculator.js   # Calculadora de fórmulas
         ├── exercises.js    # Gerador e corretor de exercícios
-        └── theory.js       # Referencial teórico com busca
+        ├── theory.js       # Referencial teórico com busca
+        └── classroom.js    # Cenários prontos, guia de estudo e modo projetor
 ```
 
 ---

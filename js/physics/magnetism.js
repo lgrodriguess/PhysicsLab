@@ -355,25 +355,74 @@ document.addEventListener("DOMContentLoaded", () => {
         senseLabel.textContent = sense;
         angleLabel.textContent = `Ângulo de entrada: ${angle}°`;
 
-        // Com "reduzir movimento" ativo, mostra um quadro parado com os vetores
-        if (reducedMotion) {
-            render(0.4);
+        // Pausado: redesenha o quadro parado com os novos parâmetros
+        if (paused) {
+            render(simTime);
         }
     }
+
+    // ---- Controle da animação: pausar e câmera lenta ----
+    // simTime é o "tempo da simulação": só avança quando não está pausado,
+    // e avança mais devagar na câmera lenta (speed < 1).
+    const playButton = document.getElementById("mag-play");
+    const speedButtons = document.querySelectorAll("#magnetism .speed-button");
+    let simTime = 0.4;
+    let speed = 1;
+    let paused = reducedMotion;   // com "reduzir movimento" ativo, começa parado
+    let lastNow = null;
+
+    function updatePlayButton() {
+        if (!playButton) return;
+        playButton.querySelector(".playback-icon").textContent = paused ? "▶" : "⏸";
+        playButton.querySelector(".playback-label").textContent = paused ? "Continuar" : "Pausar";
+        playButton.setAttribute("aria-pressed", String(paused));
+    }
+
+    function togglePause() {
+        paused = !paused;
+        lastNow = null;
+        updatePlayButton();
+    }
+
+    if (playButton) playButton.addEventListener("click", togglePause);
+
+    speedButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            speed = Number(button.dataset.speed);
+            speedButtons.forEach(b => b.classList.toggle("active", b === button));
+            if (paused) togglePause();
+        });
+    });
+
+    // Barra de espaço pausa/continua (só na página de magnetismo e fora de campos de texto)
+    document.addEventListener("keydown", event => {
+        if (event.code !== "Space" || !section || !section.classList.contains("active")) return;
+        if (event.target.closest("input, select, textarea, button, summary, [contenteditable]")) return;
+        if (document.body.classList.contains("guide-open")) return;
+        event.preventDefault();
+        togglePause();
+    });
 
     // Anima só enquanto a página de magnetismo está visível
-    const startTime = performance.now();
-
     function frame(now) {
-        if (section && section.classList.contains("active")) {
-            render((now - startTime) / 1000);
+        const visible = section && section.classList.contains("active");
+
+        if (visible && !paused) {
+            if (lastNow !== null) {
+                // Limita o passo pra não dar "pulo" ao voltar de outra aba
+                simTime += Math.min((now - lastNow) / 1000, 0.1) * speed;
+            }
+            lastNow = now;
+            render(simTime);
+        } else {
+            lastNow = null;
         }
+
         requestAnimationFrame(frame);
     }
 
-    if (!reducedMotion) {
-        requestAnimationFrame(frame);
-    }
+    updatePlayButton();
+    requestAnimationFrame(frame);
 
     // Faz os cálculos da força magnética e do raio
     function calculate() {
@@ -481,4 +530,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     drawField();
     calculate();
-});
+});

@@ -20,6 +20,7 @@
     <script src="js/features/theory.js" defer></script>
     <script src="js/features/calculator.js" defer></script>
     <script src="js/features/exercises.js" defer></script>
+    <script src="js/features/classroom.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 
@@ -86,7 +87,7 @@
 
             <div class="sidebar-footer">
                 <div class="status-indicator"></div>
-                <span>Sistema operacional</span>
+                <span id="offline-status" title="Depois do primeiro acesso, o site funciona sem internet">Sistema operacional</span>
                 <span class="version">v1.2</span>
             </div>
 
@@ -102,6 +103,16 @@
                 </div>
 
                 <div class="topbar-right">
+                    <div class="classroom-tools">
+                        <button class="tool-button" id="projector-toggle" type="button" aria-pressed="false" title="Aumenta textos e figuras para projetar na sala">
+                            <span aria-hidden="true">🖥</span>
+                            <span class="tool-label">Modo projetor</span>
+                        </button>
+                        <button class="tool-button" id="fullscreen-toggle" type="button" aria-pressed="false" title="Ocupa a tela inteira">
+                            <span aria-hidden="true">⛶</span>
+                            <span class="tool-label">Tela cheia</span>
+                        </button>
+                    </div>
                     <div class="system-status">
                         <span class="status-indicator"></span>
                         Ambiente de aprendizagem
@@ -574,6 +585,20 @@
                         <text id="magnetic-sense-label" x="300" y="258" text-anchor="middle" fill="#334155" font-size="13" font-weight="600"></text>
                         <text id="magnetic-angle-label" x="300" y="277" text-anchor="middle" fill="#475569" font-size="13"></text>
                     </svg>
+                </div>
+
+                <div class="playback-controls" role="group" aria-label="Controle da animação">
+                    <button class="playback-button" id="mag-play" type="button" aria-pressed="false">
+                        <span class="playback-icon" aria-hidden="true">⏸</span>
+                        <span class="playback-label">Pausar</span>
+                    </button>
+                    <div class="playback-speeds" role="group" aria-label="Velocidade da animação">
+                        <span>Velocidade:</span>
+                        <button class="speed-button" type="button" data-speed="0.25">0,25×</button>
+                        <button class="speed-button" type="button" data-speed="0.5">0,5×</button>
+                        <button class="speed-button active" type="button" data-speed="1">1×</button>
+                    </div>
+                    <span class="playback-hint">Atalho: barra de espaço pausa e continua</span>
                 </div>
 
                 <div class="magnetism-legend">
