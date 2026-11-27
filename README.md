@@ -10,6 +10,7 @@
 
 - [Funcionalidades](#-funcionalidades)
 - [Como executar](#-como-executar)
+- [Testes](#-testes)
 - [Estrutura do projeto](#-estrutura-do-projeto)
 - [Arquitetura](#-arquitetura)
 - [Fórmulas utilizadas](#-fórmulas-utilizadas)
@@ -115,31 +116,59 @@ Depois acesse `http://localhost:8000`.
 
 ---
 
+## ✅ Testes
+
+As fórmulas são testadas automaticamente, sem dependências (só Node.js 20 ou mais novo):
+
+```bash
+npm test
+```
+
+Os testes conferem:
+- **Valores conhecidos:** exemplos calculados à mão (Lei de Ohm, Coulomb, força magnética, Faraday, capacitores…)
+- **Coerência das fórmulas:** para cada uma das 42 fórmulas da calculadora, isolar qualquer variável devolve o valor original
+- **Cenários dos guias:** os números citados em "O que observar" (correntes, raios, FEM…) batem com a física
+- **Utilitários:** formatação de números no padrão brasileiro, prefixos do SI e constantes físicas
+
+O GitHub Actions roda os testes a cada push na `main`.
+
+---
+
 ## 📁 Estrutura do projeto
 
 ```
 PhysicsLab/
 ├── index.html              # Página única com todas as seções
-├── style.css               # Estilos globais e de cada módulo
+├── package.json            # Comandos do projeto (npm test, npm start)
 ├── sw.js                   # Service worker (modo offline)
 ├── ROADMAP.md              # Planejamento da iniciação científica
-└── js/
-    ├── main.js             # Inicialização
-    ├── navigation.js       # Navegação entre páginas (SPA com hash)
-    ├── utils.js            # Constantes, paleta de cores e funções compartilhadas
-    ├── data/
-    │   └── guides.js       # Textos dos guias de estudo e cenários prontos
-    ├── physics/
-    │   ├── electrostatics.js # Cargas, campo e potencial
-    │   ├── capacitors.js   # Capacitores e dielétricos
-    │   ├── circuits.js     # Simulador de circuitos + diagrama SVG
-    │   ├── magnetism.js    # Partícula em campo magnético
-    │   └── induction.js    # Indução eletromagnética
-    └── features/
-        ├── calculator.js   # Calculadora de fórmulas
-        ├── exercises.js    # Gerador e corretor de exercícios
-        ├── theory.js       # Referencial teórico com busca
-        └── classroom.js    # Cenários prontos, guia de estudo e modo projetor
+├── css/
+│   └── style.css           # Estilos globais e de cada módulo
+├── js/
+│   ├── main.js             # Inicialização
+│   ├── navigation.js       # Navegação entre páginas (SPA com hash)
+│   ├── utils.js            # Constantes, paleta de cores e funções compartilhadas
+│   ├── data/
+│   │   ├── formulas.js     # Fórmulas da calculadora (isoladas para cada variável)
+│   │   └── guides.js       # Textos dos guias de estudo e cenários prontos
+│   ├── physics/
+│   │   ├── electrostatics.js # Cargas, campo e potencial
+│   │   ├── capacitors.js   # Capacitores e dielétricos
+│   │   ├── circuits.js     # Simulador de circuitos + diagrama SVG
+│   │   ├── magnetism.js    # Partícula em campo magnético
+│   │   └── induction.js    # Indução eletromagnética
+│   └── features/
+│       ├── calculator.js   # Calculadora de fórmulas
+│       ├── exercises.js    # Gerador e corretor de exercícios
+│       ├── theory.js       # Referencial teórico com busca
+│       └── classroom.js    # Cenários prontos, guia de estudo e modo projetor
+├── tests/
+│   ├── load.js             # Carrega os scripts do site dentro do Node
+│   ├── formulas.test.js    # Valores conhecidos e coerência de todas as fórmulas
+│   ├── guides.test.js      # Números dos cenários batem com a física
+│   └── utils.test.js       # Formatação de números e constantes
+└── .github/workflows/
+    └── tests.yml           # Roda os testes no GitHub a cada push
 ```
 
 ---
