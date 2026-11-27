@@ -858,7 +858,7 @@ button {
 }
 
 .circuit-resistor {
-    fill: #eff6ff;
+    fill: none;
     stroke: #2563eb;
     stroke-width: 2.5;
     stroke-linejoin: round;
