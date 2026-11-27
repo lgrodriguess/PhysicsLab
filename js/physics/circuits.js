@@ -224,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 L ${x + 55} ${y + 10}
                 L ${x + 70} ${y - 10}
                 L ${x + 85} ${y}
-                Z
                 " />
 
             <text class="circuit-text"
@@ -245,7 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 L ${x + 10} ${y + 55}
                 L ${x - 10} ${y + 70}
                 L ${x} ${y + 85}
-                Z
                 " />
 
             <text class="circuit-text"
